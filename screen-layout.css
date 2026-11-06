@@ -1,0 +1,120 @@
+:root {--dialogue-font-size:18px; /* 13.5pt: existing character dialogue size */}
+
+/* Canonical layout: Tutorial 1 gameplay/dialogue, Tutorial 2 preparation.
+   Scenario-specific code must not override these dimensions. */
+.scenario-screen {
+ --left-column:220px;
+ --right-column:244px;
+ position:relative;
+ display:grid;
+ grid-template-columns:var(--left-column) minmax(0,1fr) var(--right-column);
+ grid-template-rows:60px minmax(240px,7fr) minmax(150px,3fr) 48px;
+ height:100vh;
+ height:100dvh;
+ min-height:560px;
+ min-width:960px;
+ padding:0;
+ overflow:hidden;
+ background:#0d252d;
+}
+.scenario-screen .battle-text-field {
+ grid-column:2;
+ grid-row:3;
+ min-width:0;
+ min-height:0;
+ padding:0 14px;
+ border-top:1px solid #cdb87970;
+ background:linear-gradient(115deg,#203941,#10262e);
+ overflow:hidden;
+}
+.scenario-screen .field-dialog.modal {
+ position:static;
+ width:100%;
+ max-width:none;
+ height:100%;
+ max-height:none;
+ margin:0;
+ padding:14px 18px;
+ border:0;
+ box-shadow:none;
+ background:none;
+ overflow:auto;
+}
+.scenario-screen .scenario-message {
+ min-height:100%;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+}
+.scenario-screen .scenario-speaker,
+.scenario-screen #intermission-speaker {
+ min-height:0;
+ margin:0;
+ color:var(--gold);
+ font:12px/1.6 var(--serif);
+ letter-spacing:.12em;
+}
+.scenario-screen .scenario-speaker:empty {display:none}
+.scenario-screen .tutorial-dialogue {display:flex;align-items:center;gap:20px;margin:8px 0;min-width:0}
+.scenario-screen .tutorial-dialogue .portrait {width:64px;height:64px;aspect-ratio:1;flex:0 0 64px;margin:0}
+.scenario-screen .tutorial-dialogue p {flex:1;min-width:0;color:#e5e1d4;margin:0}
+/* Body copy shares one size in lessons, speech, pickups, confirmations and combat reports. */
+.scenario-screen .field-dialog p,
+.scenario-screen .tutorial-dialogue p,
+.modal p.lesson-copy,
+.dialogue-copy {
+ font:var(--dialogue-font-size)/1.8 var(--serif);
+ letter-spacing:normal;
+ white-space:pre-wrap;
+ word-break:normal;
+ line-break:strict;
+ overflow-wrap:anywhere;
+}
+/* A phrase stays on one line when it fits. Only an overlong phrase wraps at word boundaries. */
+.dialogue-phrase,.dialogue-word {display:inline-block;max-width:100%;vertical-align:top;white-space:pre-wrap;word-break:normal;line-break:strict;overflow-wrap:anywhere}
+
+.scenario-screen .tutorial-dialogue p.thought {color:#c7d0cb}
+.scenario-screen .scenario-message .modal-actions {margin-top:auto;flex-shrink:0;gap:12px;align-items:center}
+.scenario-screen .dialogue-counter {margin-right:auto;font:10px var(--sans);color:var(--muted)}
+.scenario-screen .modal-actions button {padding:8px 20px}
+.scenario-screen .field-dialog:has(>.scenario-message) {display:flex;flex-direction:column}
+.scenario-screen .field-dialog>.scenario-message {flex:1;min-height:0}
+
+/* One preparation shell, including the restricted Tutorial 1 steps. */
+.preparation-screen .deployment-layout {display:contents}
+.preparation-header {grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#10292f}
+.preparation-header .eyebrow {font-size:9px;letter-spacing:2px}
+.preparation-header h2 {font:20px/1.3 var(--serif);margin:2px 0 0}
+.preparation-tools {gap:12px}
+.preparation-screen .deployment-layout>.panel {grid-row:2/4;min-height:0;max-height:none;margin:0;padding:16px 12px;border:0;background:#10292ff0;overflow:auto}
+.preparation-screen .deployment-objectives {grid-column:1;border-right:1px solid var(--line)!important}
+.preparation-screen .deployment-formation {grid-column:3;border-left:1px solid var(--line)!important}
+.preparation-screen .deployment-party {grid-column:2;grid-row:2;min-width:0;min-height:0;overflow:auto;padding:16px;background:#132d35}
+.preparation-screen .prep-card {display:grid;grid-template-columns:64px minmax(0,1fr) minmax(150px,.8fr);align-items:start;gap:12px;margin-bottom:12px;padding:12px}
+.preparation-screen .prep-card>div:last-child {grid-column:auto;display:block}
+.preparation-screen .prep-card .portrait {width:64px;height:64px}
+.preparation-screen .prep-card h3 {font-size:18px;margin:0 0 8px}
+.preparation-screen .prep-card .field {width:100%;margin-bottom:6px}
+.preparation-screen .prep-card .skill-list {margin-top:8px}
+.preparation-screen .prep-card button.wide+button.wide {margin-top:8px}
+.preparation-screen .brief-item {display:block;line-height:1.8;padding:10px 0}
+.preparation-screen .brief-item>span {display:block}
+.preparation-screen .brief-item>span:first-child {font-size:10px;color:var(--muted)}
+.preparation-screen .brief-item>span:last-child {font-size:12px}
+.preparation-screen .deployment-objectives h3,.preparation-screen .deployment-formation h3 {font-size:17px;margin:0 0 12px}
+.preparation-screen .deployment-preview {margin:12px 0}
+.preparation-screen .preparation-item {margin:14px 0;font-size:12px;line-height:1.8}
+.preparation-screen .preparation-item p {margin:6px 0}
+.preparation-footer {grid-column:1/-1;grid-row:4;display:flex;align-items:center;padding:0 22px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+
+/* Intermission art may span the visual row. Its dialogue uses the same center field. */
+.scenario-screen .intermission-header {grid-column:1/-1;grid-row:1;padding:0 22px}
+.scenario-screen .intermission-visual {grid-column:1/-1;grid-row:2}
+@media(min-width:1500px){.scenario-screen{--left-column:250px;--right-column:275px}}
+@media(max-width:1100px){
+ .scenario-screen{--left-column:180px;--right-column:213px}
+ .preparation-screen .prep-card{grid-template-columns:64px minmax(0,1fr)}
+ .preparation-screen .prep-card>div:last-child{grid-column:2}
+}
+
+.preparation-screen .deployment-picker .chosen {border-color:var(--gold);background:#d5bd8612;color:var(--gold)}

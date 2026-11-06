@@ -1,0 +1,10 @@
+﻿id,name,enabled,description,attack_multiplier,attack_bonus,magic_bonus,range_override,usable_by,available_by_default,collectible,source,notes
+moonScythe,夜鳴りの狩月鎌,1,夜鳴りの狩月鎌,1,0,0,0,astarthe,0,0,ゲーム仕様書ver3.0／ブラウザα0.19,
+waterStaff,蒼海の杖,1,海音の固有装備。海割りの三叉槍の使用に必要。,1,0,0,0,umine,0,0,キャラクター設定 海音さん(1)／2026-10-29,旧表示名：水紋の杖。IDは維持し旧セーブを移行。能力補正は未指定のため既存値を維持。
+greatShield,大盾,1,大盾,1,0,0,0,orion,0,0,ゲーム仕様書ver3.0／ブラウザα0.19,
+longSword,ロングソード,1,ロングソード,1,0,0,0,roland,0,0,ゲーム仕様書ver3.0／ブラウザα0.19,
+unarmed,素手,1,素手,0.6,0,0,0,astarthe,0,0,ゲーム仕様書ver3.0／ブラウザα0.19,素手の攻撃係数。武器未装備状態として管理。
+brokenSword,折れた直剣,1,折れた直剣,0.8,20,0,0,astarthe,0,1,ゲーム仕様書ver3.0／ブラウザα0.19,攻撃＋20は装備中のみ適用。既存の基礎攻撃0.8倍を維持。
+ironDagger,鉄の短剣,1,鉄の短剣,1,0,0,0,astarthe,0,1,ゲーム仕様書ver3.0／ブラウザα0.19,専用の補正値は未指定。現行の通常武器係数を維持。
+trainingWeapon,訓練装備,1,訓練装備,1,0,0,0,*,1,0,ゲーム仕様書ver3.0／ブラウザα0.19,
+siriusBastardSword,天狼星のバスタードソード,1,星詠みの固有装備。,1,0,0,1,hoshiyomi,0,0,キャラクター設定 星詠み／2026-10-26,固有名称と通常攻撃射程1は採用設定。武器独自の攻撃補正は未指定のため通常係数1・追加補正0を暫定採用。狼形態でも同じ攻撃能力を使用。

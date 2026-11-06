@@ -1,0 +1,64 @@
+{
+  "anchor": [
+    128,
+    240
+  ],
+  "frames": [
+    {
+      "direction": 0,
+      "file": "astarthe_bh_D0.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "fdfc6ac0ae605a1e6e885a240c030c938b93d341890ce6b87f0dee7b87f0f2e0"
+    },
+    {
+      "direction": 1,
+      "file": "astarthe_bh_D1.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "d96c36a836c3084a173853256715525b91f218b530af88075c16b3a975d933e1"
+    },
+    {
+      "direction": 2,
+      "file": "astarthe_bh_D2.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "280cb7c64e33aa05fc1eab872416b774edf2eec5eecf27f0526a6e60217c55c9"
+    },
+    {
+      "direction": 3,
+      "file": "astarthe_bh_D3.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "fc02bfafbfc6cea0bc06d90459f165d0a5328bfd5870abfcdb01113c7f337891"
+    },
+    {
+      "direction": 4,
+      "file": "astarthe_bh_D4.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "7846e116b0660fd662cce10ddf2dbb02e7c4a6c8dcc72e1e58acabddbb4d4fec"
+    },
+    {
+      "direction": 5,
+      "file": "astarthe_bh_D5.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "235376cb58a4acffa543f272983473bf14fe6206bfc4fb43448c597440d0b8cb"
+    },
+    {
+      "direction": 6,
+      "file": "astarthe_bh_D6.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "ef4cf5b54ed9ae0103e8e40cee382f6d3b5f307312e9e073ee5d584fb2f084cf"
+    },
+    {
+      "direction": 7,
+      "file": "astarthe_bh_D7.png",
+      "width": 256,
+      "height": 256,
+      "sha256": "55bd7088a78f03022569c5a92b33255d1f53507f2618481fbea5a01809d4d199"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "source": "orion_plate_idle_sheet_1x8(1).png",
+  "file": "idle-sheet.png",
+  "sha256": "d8f3143efba410661940088560f50cf172149d0f8394c1fa9aa4e095d2d99c86",
+  "width": 256,
+  "height": 2048,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 1,
+  "rows": 8,
+  "directionOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "anchor": [
+    126,
+    244
+  ],
+  "anchors": [
+    [
+      126,
+      244
+    ],
+    [
+      133,
+      240
+    ],
+    [
+      131,
+      239
+    ],
+    [
+      130,
+      239
+    ],
+    [
+      129,
+      244
+    ],
+    [
+      121,
+      239
+    ],
+    [
+      130,
+      240
+    ],
+    [
+      142,
+      240
+    ]
+  ],
+  "anchorDescription": "各方向の両足の接地点中央（D0〜D7）。影の中心に合わせる。"
+}

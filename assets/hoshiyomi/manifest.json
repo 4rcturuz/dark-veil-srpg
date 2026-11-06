@@ -1,0 +1,60 @@
+{
+  "source": "hoshiyomi_sheathed_idle_sheet_1x8(1).png",
+  "file": "idle-sheet.png",
+  "sha256": "da10bee0da13e92d0a997da807ff256b8c9fe9165eb7f0d070c1f7666825299c",
+  "width": 256,
+  "height": 2048,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 1,
+  "rows": 8,
+  "directionOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "anchor": [
+    125,
+    241
+  ],
+  "anchors": [
+    [
+      125,
+      241
+    ],
+    [
+      124,
+      232
+    ],
+    [
+      132,
+      235
+    ],
+    [
+      120,
+      241
+    ],
+    [
+      126,
+      241
+    ],
+    [
+      133,
+      237
+    ],
+    [
+      120,
+      229
+    ],
+    [
+      124,
+      228
+    ]
+  ],
+  "anchorDescription": "各方向の両足の接地点中央（D0〜D7）。影の中心に合わせる。"
+}

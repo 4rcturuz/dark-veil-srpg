@@ -1,0 +1,52 @@
+import {ITEMS,MISSIONS,STATUS_NAMES} from './data.js';
+import {INTERMISSION_PAGES} from './intermission-data.js';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const button=(action,label,extra='')=>`<button data-debug="${action}" ${extra}>${label}</button>`;
+const field=(name,label,value,min,max)=>`<label>${label}<input name="${name}" type="number" value="${value}" min="${min}" max="${max}" step="1" required></label>`;
+
+export class DebugMenu{
+ constructor(root,getState,onAction){
+  this.root=root;this.getState=getState;this.onAction=onAction;this.opened=false;this.tab='scenes';this.unitId=null;
+  root.addEventListener('click',e=>{
+   const el=e.target.closest('[data-debug]');if(!el||el.disabled)return;
+   const action=el.dataset.debug;
+   if(action==='close'){this.close();return;}
+   if(action==='tab'){this.tab=el.dataset.id;this.render();return;}
+   this.run(action,{...el.dataset});
+  });
+  root.addEventListener('submit',e=>{e.preventDefault();const form=e.target;if(!form.reportValidity())return;this.run(form.dataset.debugForm,Object.fromEntries(new FormData(form)));});
+  root.addEventListener('change',e=>{if(e.target.name==='unit'){this.unitId=e.target.value;this.render();}});
+ }
+ open(){this.returnFocus=document.activeElement;this.opened=true;this.background=[document.querySelector('#app'),document.querySelector('#modal-root')].filter(Boolean);this.previousInert=this.background.map(el=>el.inert);this.background.forEach(el=>el.inert=true);this.render();}
+ close(){this.opened=false;this.root.innerHTML='';this.background?.forEach((el,i)=>el.inert=this.previousInert[i]);if(this.returnFocus?.isConnected)this.returnFocus.focus();}
+ run(action,data){try{this.onAction(action,data);if(this.opened)this.render('操作を反映しました。');}catch(e){this.render(e.message,true);}}
+ handleKey(e){
+  if(!this.opened)return false;
+  if(e.key==='Escape'){e.preventDefault();this.close();}
+  if(e.key==='Tab'){
+   const nodes=[...this.root.querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled)')],first=nodes[0],last=nodes[nodes.length-1];
+   if(e.shiftKey&&document.activeElement===first){last?.focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===last){first?.focus();e.preventDefault();}
+  }
+  return true;
+ }
+ render(message='',error=false){
+  const s=this.getState(),b=s.battle;
+  const location=s.screen==='intermission'?`幕間 · ${s.page+1} / ${INTERMISSION_PAGES.length}`:b?`${b.mission.name} · ${b.stage+1}区画 / TURN ${b.turn}`:({title:'タイトル',base:'拠点',prep:'出撃準備'}[s.screen]??s.screen);
+  this.root.innerHTML=`<div class="debug-shade"><section class="debug-panel" role="dialog" aria-modal="true" aria-labelledby="debug-heading"><header class="debug-header"><div><div class="eyebrow">DARK VEIL · DEVELOPMENT</div><h2 id="debug-heading">デバッグメニュー</h2></div>${button('close','閉じる <kbd>F2 / Esc</kbd>','aria-label="デバッグメニューを閉じる"')}</header><div class="debug-status"><span class="debug-dot ${s.active?'active':''}"></span><strong>${s.active?'検証用セッション':'通常プレイ'}</strong><span>${esc(location)}</span></div>${s.active?`<div class="debug-layout"><nav aria-label="デバッグ項目">${[['scenes','01','シーン移動'],['units','02','ユニット'],['items','03','所持品'],['progress','04','進行情報']].map(([id,n,name])=>button('tab',`<small>${n}</small>${name}`,`data-id="${id}" aria-pressed="${this.tab===id}"`)).join('')}</nav><div class="debug-content">${this.content(s)}</div></div>`:`<div class="debug-intro"><span class="debug-symbol">⌘</span><h3>確認したい場面へ、すぐに。</h3><p>チュートリアル・幕間の呼び出し、ユニットや所持品の調整、<br>進行フラグの確認ができます。</p><div class="debug-note">現在の記録をコピーして開始します。<br>検証中は保存を停止し、終了すると元の記録に戻ります。</div>${button('start','デバッグを開始　→',`class="primary" ${s.canStart?'':'disabled'}`)}${!s.canStart?'<p class="debug-notice">戦闘・イベントを終え、タイトルか拠点から開始してください。</p>':''}</div>`}<footer class="debug-footer"><div id="debug-feedback" role="status" class="${error?'debug-error':''}">${esc(message||'F2で開閉 · 検証内容は通常の記録に保存されません')}</div>${s.active?button('end','デバッグを終了'):'<span class="tiny muted">α 0.29</span>'}</footer></section></div>`;
+  this.root.querySelector('[data-debug="close"]')?.focus();
+ }
+ content(s){
+  const b=s.battle,locked=!s.editable,disabled=locked?'disabled':'';
+  if(this.tab==='scenes')return `<h3>シーン移動</h3><p class="debug-description">現在の検証中の戦闘を終了して、指定した場面を開始します。</p><h4>チュートリアル · 廃墟の聖堂</h4><div class="debug-cards">${['1/3　目覚めの聖堂','2/3　マトロネウム','3/3　聖堂の地上階'].map((name,i)=>button('tutorial',`<span>AREA 0${i+1}</span>${name}<small>${i?'折れた直剣を装備して開始':'冒頭の会話から開始'}</small>`,`data-id="${i}"`)).join('')}</div><h4>チュートリアル2 · 灰の墓地 α版</h4><div class="debug-row">${[['injured','出撃準備 · 負傷'],['full','出撃準備 · 全快'],['battle','探索開始']].map(([id,label])=>button('cemetery',label,`data-id="${id}"`)).join('')}</div><form data-debug-form="cemetery-password" class="debug-form"><label>隠し分岐のパスワード<input name="password" type="password" autocomplete="off" required></label><button type="submit">解禁</button><span class="tiny muted">${s.bossUnlocked?'解禁済み · 次の灰の墓地出撃から有効':'未解禁 · 検証セッション内のみ'}</span></form><h4>幕間 / Intermission</h4><div class="debug-row">${[[1,'礼拝堂正面'],[24,'街道への移行直前'],[25,'寂れた街道跡'],[44,'灰の墓地']].map(([page,label])=>button('intermission',label,`data-page="${page}"`)).join('')}</div><form data-debug-form="page" class="debug-form">${field('page','会話ページ',s.page+1,1,INTERMISSION_PAGES.length)}<button type="submit">このページから開始</button><span class="tiny muted">全${INTERMISSION_PAGES.length}ページ</span></form><h4>本編の戦役</h4><div class="debug-row">${MISSIONS.map((m,i)=>button('mission',esc(m.name),`data-id="${i}"`)).join('')}${button('base','拠点へ')}</div>`;
+  if(this.tab==='units'){
+   if(!b)return '<h3>ユニット</h3><p class="debug-description">シーン移動から探索・戦闘マップを開くと利用できます。</p>';
+   const u=b.units.find(u=>u.id===this.unitId)??b.units[0];this.unitId=u.id;
+   return `<h3>ユニット調整</h3>${locked?'<p class="debug-notice">会話・演出を終え、自軍の操作が可能になると変更できます。</p>':''}<fieldset ${disabled}><legend>味方全体</legend><div class="debug-row">${[['hp','HP全回復・蘇生'],['actions','移動力・行動回復'],['cooldowns','CT・使用回数リセット'],['status','状態異常・バフ解除']].map(([id,label])=>button('recover',label,`data-id="${id}"`)).join('')}</div><p class="tiny muted">行動回復時も状態異常のペナルティを適用。ターンは経過しません。</p></fieldset><label class="debug-unit-label">対象ユニット<select name="unit">${b.units.map(v=>`<option value="${esc(v.id)}" ${v.id===u.id?'selected':''}>${v.team==='ally'?'味方':'敵'} · ${esc(v.name)} (${v.x+1}, ${v.y+1})</option>`).join('')}</select></label><div class="debug-metrics"><span>HP <strong>${u.hp} / ${b.effective(u,'maxHp')}</strong></span><span>移動力 <strong>${u.mp}</strong></span><span>行動 <strong>${u.ap}</strong></span><span>高さ <strong>${b.elevationAt(u)}</strong></span></div><fieldset ${disabled}><form data-debug-form="hp" class="debug-form"><input name="unit" type="hidden" value="${esc(u.id)}">${field('hp','HP',Math.max(1,u.hp),1,b.effective(u,'maxHp'))}<button type="submit">HPを変更</button></form><form data-debug-form="teleport" class="debug-form"><input name="unit" type="hidden" value="${esc(u.id)}">${field('x','X（1始まり）',u.x+1,1,b.map.width)}${field('y','Y（1始まり）',u.y+1,1,b.map.height)}<button type="submit">座標へ配置</button><label class="debug-check"><input name="trigger" type="checkbox" value="yes">到着イベント・拾得も実行</label></form><p class="tiny muted">移動コストは消費しません。壁・マップ外・重複配置は不可。経路途中の地形効果は発生しません。</p><form data-debug-form="elevation" class="debug-form">${field('x','高度を変えるX',u.x+1,1,b.map.width)}${field('y','高度を変えるY',u.y+1,1,b.map.height)}${field('elevation','高さ',b.elevationAt(u),-99,99)}<button type="submit">高さを変更</button></form><p class="tiny muted">検証中のタイルだけ変更。地形・配置・ターンは変えません。</p><form data-debug-form="status" class="debug-form"><input name="unit" type="hidden" value="${esc(u.id)}"><label>状態異常<select name="status">${Object.entries(STATUS_NAMES).map(([id,label])=>`<option value="${id}">${label}</option>`).join('')}</select></label>${field('turns','残りターン',3,1,99)}<button type="submit">付与</button></form></fieldset><h4>現在の状態</h4><pre>${esc(JSON.stringify({status:u.status,buffs:u.buffs,cd:u.cd,uses:u.uses},null,2))}</pre>`;
+  }
+  if(this.tab==='items'){
+   const items=b?b.items:s.campaign.inventory;
+   return `<h3>所持品</h3><p class="debug-description">${b?'現在の戦闘の所持品':'検証用の拠点の所持品'}に反映します。</p>${b&&locked?'<p class="debug-notice">自軍の操作が可能になると変更できます。</p>':''}<fieldset ${b?disabled:''}><form data-debug-form="item" class="debug-form"><label>消費アイテム<select name="item">${Object.entries(ITEMS).map(([id,i])=>`<option value="${id}">${esc(i.name)} · 現在 ${items[id]??0}</option>`).join('')}</select></label>${field('count','設定する所持数',10,0,99)}<button type="submit">所持数を変更</button></form><form data-debug-form="runes" class="debug-form">${field('count','ルーン',b?b.runes:s.campaign.runes,0,9999999)}<button type="submit">変更</button></form>${!b?`<form data-debug-form="blood" class="debug-form">${field('count','血の澱',s.campaign.blood,0,9999999)}<button type="submit">変更</button></form>`:''}</fieldset><h4>現在の所持品</h4><div class="debug-inventory">${Object.entries(items).filter(([,n])=>n>0).map(([id,n])=>`<div><span>${esc(ITEMS[id]?.name??id)}</span><strong>×${n}</strong></div>`).join('')||'<p>所持アイテム：なし</p>'}</div>`;
+  }
+  return `<h3>進行情報</h3><p class="debug-description">フラグ・イベント待機状態とログを確認できます。</p>${b?.tutorial2?`<fieldset ${disabled}><legend>条件を作成して進行を検証</legend><div class="debug-row">${[['high','If1 高台を視認'],['select','If2 海音を選択'],['damage','If4 被ダメージ'],['low','If5 HP半分未満'],['goal-one','If6 1人到達'],['goal-all','3人到達'],['defeat-all','残敵を全撃破'],['normal-ending','通常終幕へ']].map(([id,label])=>button('cemetery-condition',label,`data-id="${id}"`)).join('')}</div><p class="tiny muted">一度発火した説明は再発火しません。再検証はシーン移動から。全撃破後も到達者がいる場合はターン終了時に判定。</p></fieldset>`:''}${b?.tutorial?`<fieldset ${disabled}><div class="debug-row">${button('rubble','チュートリアル⑥を再検証')}${button('skills','通常攻撃・ワルツを解放')}</div><p class="tiny muted">⑥の既読状態を解除。次の瓦礫マス進入で再発火します。</p></fieldset>`:''}<div class="debug-row">${button('report','検証レポートをJSONで保存')}</div><h4>進行フラグ</h4><pre>${esc(JSON.stringify(b?{stage:b.stage+1,turn:b.turn,phase:b.phase,flow:b.flow,triggerHistory:b.triggerHistory,pendingDamage:b.pendingDamage?[...b.pendingDamage]:undefined,flags:b.flags??{},lessons:b.lessons??[],pendingExit:!!b.pendingExit,preparing:!!b.preparing,retryPending:!!b.retryPending,messages:b.messages}:s.campaign.cathedralIntermission??{screen:s.screen},null,2))}</pre>${b?`<h4>直近の行動ログ</h4><div class="debug-log">${b.log.slice(-15).map(l=>`<p>${esc(l)}</p>`).join('')||'<p>ログなし</p>'}</div>`:''}`;
+ }
+}

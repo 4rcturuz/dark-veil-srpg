@@ -1,0 +1,60 @@
+{
+  "source": "umine_staff_idle_sheet_1x8(1).png",
+  "file": "idle-sheet.png",
+  "sha256": "bf868cba88a4e76acb41770ee77091fed7f801343a1a4e97f7c3996e6ab5c260",
+  "width": 256,
+  "height": 2048,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 1,
+  "rows": 8,
+  "directionOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "anchor": [
+    128,
+    246
+  ],
+  "anchors": [
+    [
+      128,
+      246
+    ],
+    [
+      130,
+      245
+    ],
+    [
+      129,
+      241
+    ],
+    [
+      127,
+      240
+    ],
+    [
+      128,
+      245
+    ],
+    [
+      129,
+      241
+    ],
+    [
+      129,
+      241
+    ],
+    [
+      125,
+      242
+    ]
+  ],
+  "anchorDescription": "各方向の両足の接地点中央（D0〜D7）。影の中心に合わせる。"
+}

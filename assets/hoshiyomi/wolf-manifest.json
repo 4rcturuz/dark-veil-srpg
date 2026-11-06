@@ -1,0 +1,56 @@
+{
+  "source": "hoshiyomi_wolf_idle_sheet_1x8(1).png",
+  "file": "wolf-idle-sheet.png",
+  "sha256": "cd186b4c61175d8bc9434b2ec829445d6377499c61aa6b207542f199668bba43",
+  "width": 256,
+  "height": 2048,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 1,
+  "rows": 8,
+  "directionOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "anchors": [
+    [
+      130,
+      242
+    ],
+    [
+      129,
+      238
+    ],
+    [
+      128,
+      232
+    ],
+    [
+      128,
+      229
+    ],
+    [
+      128,
+      230
+    ],
+    [
+      128,
+      230
+    ],
+    [
+      128,
+      230
+    ],
+    [
+      128,
+      239
+    ]
+  ],
+  "anchorDescription": "四肢の接地面中央。D0～D7。尾の下端は基準にしない。"
+}
