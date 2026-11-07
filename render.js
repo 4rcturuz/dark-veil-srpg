@@ -141,7 +141,7 @@ export class MapView{
   // Resolve overlapping raised surfaces in their actual painter order; a cliff is not a destination behind it.
   for(const {x,y}of this.terrainTiles().reverse()){
    const p=this.surface(x,y),faces=this.cliffFaces(x,y,bottom),top=this.groundPolygon(x,y),hit=pts=>containsPoint(pts,px-p.x,py-p.y);
-   const opaque=this.terrainOpacity(x,y,faces,shapes)===1,ownTarget=state.reachable?.has(key(x,y))||state.area?.some(p=>p.x===x&&p.y===y)||(state.selected?.x===x&&state.selected?.y===y);
+   const opaque=this.terrainOpacity(x,y,faces,shapes)===1,ownTarget=state.reachable?.has(key(x,y))||state.area?.some(p=>p.x===x&&p.y===y)||state.targetRange?.some(p=>p.x===x&&p.y===y)||(state.selected?.x===x&&state.selected?.y===y);
    if(hit(top)){if(opaque||ownTarget)return {x,y};fallback??={x,y};}
    if(opaque&&faces.some(f=>hit(f.points)))return {x,y};
   }
@@ -174,7 +174,7 @@ export class MapView{
   if(!u||u.team!=='ally'||u.hp<=0)return shapes;
   const p=this.movingPosition(u,time);
   shapes.push({depth:this.iso(this.movingPose(u,time).x,this.movingPose(u,time).y).y,points:[[p.x-24,p.y-74],[p.x+24,p.y-74],[p.x+24,p.y+9],[p.x-24,p.y+9]]});
-  const cells=new Set((st.area??[]).filter(p=>this.battle.visible.has(key(p.x,p.y))).map(p=>key(p.x,p.y)));
+  const cells=new Set([...(st.area??[]),...(st.targetRange??[])].filter(p=>this.battle.visible.has(key(p.x,p.y))).map(p=>key(p.x,p.y)));
   if(st.mode==='move')for(const k of (st.reachable??new Map()).keys())cells.add(k);
   for(const k of cells){const [x,y]=k.split(',').map(Number),p=this.surface(x,y);shapes.push({depth:this.iso(x,y).y,points:this.groundPolygon(x,y).map(([dx,dy])=>[p.x+dx,p.y+dy])});}
   return shapes;
@@ -252,7 +252,7 @@ export class MapView{
   const warning=new Set((b.telegraph?.cells??[]).map(p=>key(p.x,p.y)));
   for(const u of [...b.units,...(b.cinematicActors??[])]){const pose=this.movingPose(u,time),p=this.surface(pose.x+(u.heavy ? .5 : 0),pose.y+(u.heavy ? .5 : 0)),visible=this.movements.has(u.id)&&u.team==='enemy'?b.cells({...u,x:Math.round(pose.x),y:Math.round(pose.y)}).some(p=>b.visible.has(key(p.x,p.y))):(b.cinematicActors?.includes(u)||b.isVisible(u));if(visible)objects.push({u,pose,p,depth:this.iso(pose.x+(u.heavy ? .5 : 0),pose.y+(u.heavy ? .5 : 0)).y+.02});}
   objects.sort((a,b)=>a.depth-b.depth||Number(!!a.u)-Number(!!b.u));
-  const reachable=st.reachable??new Map(),area=st.area??[],areaSet=new Set(area.map(p=>key(p.x,p.y)));
+  const reachable=st.reachable??new Map(),area=st.area??[],areaSet=new Set(area.map(p=>key(p.x,p.y))),targetRangeSet=new Set((st.targetRange??[]).map(p=>key(p.x,p.y)));
   for(const object of objects){
    if(object.art){c.save();c.globalAlpha=object.visible?(object.gate ? .85 : 1):.4;drawScenery(c,object.art,object.p.x+object.wiggle,object.p.y,object.gate);c.restore();continue;}
    if(object.u){const {u,pose,p}=object,direction=st.interactive===false&&Number.isInteger(u.eventDirection)?u.eventDirection:directionFrame(pose.facing,this.yaw,b.map.invertY);sprite(c,u,p.x,p.y,u.id===st.selected?.id,time,direction,!b.scripted,0,b.effective(u,'maxHp'));continue;}
@@ -275,7 +275,8 @@ export class MapView{
    }
    c.globalAlpha=1;
    if(reachable.has(k)&&st.selected?.team==='ally'&&st.mode==='move'&&k!==key(st.selected.x,st.selected.y)){poly(c,diamond,'#4797d9eb','#b7e0ff');}
-   if(areaSet.has(k)&&visible)poly(c,diamond,['tideBlessing','waltz','bastion','guidance'].includes(st.mode)?'#5ea984eb':'#d66d57eb','#ffe0c7');
+    if(targetRangeSet.has(k)&&visible)poly(c,diamond,'#8b739deb','#e5d6ff');
+    if(areaSet.has(k)&&visible)poly(c,diamond,['tideBlessing','waltz','bastion','guidance'].includes(st.mode)?'#5ea984eb':'#d66d57eb','#ffe0c7');
    if(visible&&st.danger){if(st.danger.now.has(k))poly(c,diamond,'#c34c49bf','#ffc1a4');else if(st.danger.after.has(k))poly(c,diamond,'#aa41455e','#ce837e');}
    if(visible&&warning.has(k)){poly(c,diamond,'#ec8732af','#ffe5a3');c.save();c.beginPath();diamond.forEach(([xx,yy],i)=>i?c.lineTo(xx,yy):c.moveTo(xx,yy));c.closePath();c.clip();for(let v=-42;v<43;v+=8)line(c,[[v-12,16],[v+12,-16]],'#ffe6adb0',2);c.restore();}
    if(this.hover?.x===x&&this.hover?.y===y){poly(c,diamond,'#dbc89918','#efdb9c');}

@@ -335,10 +335,22 @@ export class Battle{
   else if(target)add(target.x,target.y);
   return cells.filter(p=>(!s.directional||!occupied.some(q=>q.x===p.x&&q.y===p.y))&&(!s.lineOfSight||this.lineClear(u,p))&&(!u.status.blind||dist(u,p)<=1)&&(!['attack','debuff'].includes(s.kind)||(s.shape==='rays'?dist(u,p):near(u,p))<=this.effectiveRange(u,p,id)));
  }
- canTarget(u,id,target){
+ // Spatial casting range is independent of the unit required as an effect center.
+ inTargetRange(u,id,target){
   const s=SKILLS[id];if(!target||!this.inside(target.x,target.y)||u.status.blind&&dist(u,target)>1)return false;
-  if(s.shape==='targetArea'){const ally=this.units.find(v=>v.id===target.id&&v.hp>0&&v.team===u.team&&v.x===target.x&&v.y===target.y);return !!ally&&near(u,target)<=s.range&&this.lineClear(u,target);}
+  if(s.shape==='targetArea')return near(u,target)<=s.range&&this.lineClear(u,target);
   if(s.shape==='line2')return dist(u,target)>0&&dist(u,target)<=this.effectiveRange(u,target,id)&&(u.x===target.x||u.y===target.y)&&this.lineClear(u,target);
+  return true;
+ }
+ targetRange(u,id){
+  if(!SKILLS[id]?.targeted)return [];
+  const cells=[];
+  for(let y=0;y<this.map.height;y++)for(let x=0;x<this.map.width;x++)if(this.inTargetRange(u,id,{x,y}))cells.push({x,y});
+  return cells;
+ }
+ canTarget(u,id,target){
+  if(!this.inTargetRange(u,id,target))return false;
+  if(SKILLS[id].shape==='targetArea')return this.units.some(v=>v.id===target.id&&v.hp>0&&v.team===u.team&&v.x===target.x&&v.y===target.y);
   return true;
  }
  inRange(u,t,id){

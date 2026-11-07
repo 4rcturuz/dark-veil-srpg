@@ -118,3 +118,5 @@
 .cemetery-skip{position:absolute;right:16px;top:16px;z-index:45;background:#10202de0}
 .cemetery-screen-fade{pointer-events:none}
 .selection-stats[hidden]{display:none}
+
+.legend-square.range{background:#8b739d;border:1px solid #e5d6ff}
