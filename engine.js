@@ -40,7 +40,7 @@ export function validateCampaign(v){
  if(typeof v.autoSave!=='boolean')throw Error('設定データが壊れています。');
  for(const [i,h] of v.heroes.entries()){
   const d=HEROES[i];
-  if(!h||h.id!==d.id||!Number.isInteger(h.lv)||!number(h.lv,1,100)||!number(h.xp,0,10000)||!Number.isInteger(h.upgrade)||!number(h.upgrade,0,5)||!number(h.hp,0,stats(h).maxHp)||typeof h.rest!=='boolean'||typeof h.penalty!=='boolean'||!Array.isArray(h.equipped)||h.equipped.length>4||new Set(h.equipped).size!==h.equipped.length||h.equipped.some(s=>!d.skills.includes(s))||![...weaponOptions(h,v).map(w=>w.name),...(h.id==='astarthe'?[WEAPONS.unarmed.name]:[])].includes(h.weapon)||!Object.values(ALL_ITEMS).some(i=>i.category==='armor'&&i.name===h.armor&&(i.usable_by.includes('*')||i.usable_by.includes(h.id))))throw Error('ユニットデータが壊れています。');
+  if(!h||h.id!==d.id||!Number.isInteger(h.lv)||!number(h.lv,1,100)||!number(h.xp,0,10000)||!Number.isInteger(h.upgrade)||!number(h.upgrade,0,5)||!number(h.hp,0,stats(h).maxHp)||typeof h.rest!=='boolean'||typeof h.penalty!=='boolean'||!Array.isArray(h.equipped)||h.equipped.length>d.skills.length||new Set(h.equipped).size!==h.equipped.length||h.equipped.some(s=>!d.skills.includes(s))||![...weaponOptions(h,v).map(w=>w.name),...(h.id==='astarthe'?[WEAPONS.unarmed.name]:[])].includes(h.weapon)||!Object.values(ALL_ITEMS).some(i=>i.category==='armor'&&i.name===h.armor&&(i.usable_by.includes('*')||i.usable_by.includes(h.id))))throw Error('ユニットデータが壊れています。');
  }
  for(const k of Object.keys(ITEMS))if(!Number.isInteger(v.inventory[k])||!number(v.inventory[k],0,ITEMS[k].stackLimit))throw Error('アイテムデータが壊れています。');
  for(const [k,x] of Object.entries(v.cleared))if(!['0','1','2'].includes(k)||!x||!['S','A','B','C','D','E'].includes(x.rank)||!number(x.turns,1,200)||typeof x.win!=='boolean')throw Error('戦績データが壊れています。');
@@ -246,11 +246,7 @@ export class Battle{
    const occupant=this.at(q.x,q.y);if(occupant&&occupant.team!==u.team){this.addLog('進路を塞ぐ敵を発見した。移動を停止。');break;}
    const cost=this.moveCost(u,u,q,false);if(cost>u.mp){this.addLog('実際の地形により、ここで移動を停止。');break;}
    u.mp-=cost;if(u.wolf_move)u.movementSpent=(u.movementSpent||0)+cost;u.facing={x:q.x-u.x,y:q.y-u.y};u.x=q.x;u.y=q.y;moved++;travelled.push({...q});if(!occupant||occupant===u)lastFree={...q};
-   const t=this.tile(q.x,q.y);
-   if(t==='thorn'||t==='charge')this.hurt(u,Math.floor(u.maxHp*.1),'地形');
-   if(t==='charge'&&this.random()<.5)this.setStatus(u,'paralysis',3,u.team);
-   if(t==='lava'){this.setStatus(u,'burn',5,u.team);this.setStatus(u,'lavaSlow',3,u.team);}
-   if(t==='sound')this.setStatus(u,'exposed',3,u.team);
+   this.enterTerrain(u);
    this.updateVision();observed||=this.isVisible(u);if(u.hp<=0||u.status.paralysis)break;
   }
   if(this.units.some(v=>v!==u&&v.hp>0&&v.x===u.x&&v.y===u.y)){u.x=lastFree.x;u.y=lastFree.y;}
@@ -289,7 +285,7 @@ export class Battle{
  }
  // Area travel is not a turn: refill budgets without ticking any duration or CT.
  refreshAreaActions(){for(const u of this.units.filter(u=>u.team==='ally')){u.waited=false;u.movementSpent=0;u.movementLocked=false;u.ap=u.hp>0&&!u.status.paralysis?1:0;u.mp=u.hp>0?this.movementLimit(u):0;}}
- movementLimit(u){return u.status.paralysis?0:Math.max(0,Math.floor((this.effective(u,'move')-(u.status.lavaSlow?2:0))*(u.status.freeze?.5:1)));}
+ movementLimit(u){if(u.status.paralysis)return 0;const base=Math.max(0,Math.floor((this.effective(u,'move')-(u.status.lavaSlow?2:0))*(u.status.freeze?.5:1)));return u.status.shadowPin?Math.max(1,base-2):base;}
  setBuff(u,stat,amount,turns,source){u.buffs[stat]??={};u.buffs[stat][amount<0?'negative':'positive']={amount,turns,source};const name={atk:'攻撃',def:'防御',mag:'神秘',res:'抗秘',speed:'迅速',move:'移動力'}[stat]??stat;this.report(`${u.name}：${name}${amount<0?'低下':'上昇'} ${stat==='move'?Math.abs(amount):Math.round(Math.abs(amount)*100)+'%'}（${turns}ターン）。`,u);}
  triggerHundredCuts(u){
   const s=SKILLS.hundredcuts,before=this.movementLimit(u);
@@ -308,6 +304,7 @@ export class Battle{
   if(u.hp<=0||u.waited||u.status.paralysis||!u.ap&&!s.freeAction)return '行動済み';
   if(s.kind==='transform'&&!u.wolf_move)return '形態未設定';
   if(s.oncePerTurn&&u.transformedTurn===this.turn)return 'このターン使用済み';
+  if(s.excludesWeapon&&u.weapon===s.excludesWeapon)return '固有武器装備中';
   if(s.requires&&u.weapon!==s.requires&&u.armor!==s.requires)return '必要装備なし';
   if(u.cd[id]>0)return `CT ${u.cd[id]}`;if(s.uses&&(u.uses[id]||0)>=s.uses)return '残り0回';return '';
  }
@@ -338,7 +335,7 @@ export class Battle{
  // Spatial casting range is independent of the unit required as an effect center.
  inTargetRange(u,id,target){
   const s=SKILLS[id];if(!target||!this.inside(target.x,target.y)||u.status.blind&&dist(u,target)>1)return false;
-  if(s.shape==='targetArea')return near(u,target)<=s.range&&this.lineClear(u,target);
+  if(s.shape==='targetArea'||s.kind==='relocate')return dist(u,target)<=s.range&&this.lineClear(u,target);
   if(s.shape==='line2')return dist(u,target)>0&&dist(u,target)<=this.effectiveRange(u,target,id)&&(u.x===target.x||u.y===target.y)&&this.lineClear(u,target);
   return true;
  }
@@ -350,7 +347,7 @@ export class Battle{
  }
  canTarget(u,id,target){
   if(!this.inTargetRange(u,id,target))return false;
-  if(SKILLS[id].shape==='targetArea')return this.units.some(v=>v.id===target.id&&v.hp>0&&v.team===u.team&&v.x===target.x&&v.y===target.y);
+  if(SKILLS[id].shape==='targetArea'||SKILLS[id].kind==='relocate')return this.units.some(v=>v.id===target.id&&v.hp>0&&v.team===u.team&&v.x===target.x&&v.y===target.y);
   return true;
  }
  inRange(u,t,id){
@@ -362,7 +359,7 @@ export class Battle{
   return d>0&&d<=r&&(u.x===t.x||u.y===t.y)&&this.lineClear(u,t);
  }
  targets(u,id,target=null,resolve=false){
-  const s=SKILLS[id];if(s.kind==='transform')return [u];if(s.kind==='buff')return this.living(u.team).filter(v=>this.area(u,id,target).some(p=>p.x===v.x&&p.y===v.y));
+  const s=SKILLS[id];if(s.kind==='relocate')return this.living(u.team).filter(v=>this.canTarget(u,id,v));if(s.kind==='transform')return [u];if(s.kind==='buff')return this.living(u.team).filter(v=>this.area(u,id,target).some(p=>p.x===v.x&&p.y===v.y));
   if(s.kind==='heal'){if(!s.shape)return this.living(u.team).filter(v=>this.inRange(u,v,id));const area=this.area(u,id,target);return this.living(u.team).filter(v=>this.cells(v).some(q=>area.some(p=>p.x===q.x&&p.y===q.y)));}
   let enemies=this.living(u.team==='ally'?'enemy':'ally').filter(v=>s.pierce||resolve&&s.hitsUnseen||u.team==='enemy'||this.isVisible(v));
   if(s.water)enemies.push(...this.living(u.team).filter(v=>v.status.burn));
@@ -392,6 +389,7 @@ export class Battle{
   const resistance=(b.resistance||0)*(1+this.courtshipBonus(b))*(b.status.feral?(b.status.feral.multiplier??ITEMS.feral.statMultiplier):1);
   if(s.paralysis&&b.hp>0&&this.random()*100<s.paralysis-resistance){this.setStatus(b,'paralysis',3,a.team);}
   if(s.poison&&b.hp>0&&this.random()*100<s.poison-resistance)this.setStatus(b,'poison',5,a.team);
+  if(s.shadowPin&&b.hp>0)this.setStatus(b,'shadowPin',1,a.team);
   if(s.water&&!partial&&b.status.burn)this.removeStatus(b,'burn');
   if(b.hp>0&&b.heavy)return;
   if(b.hp>0&&s.push)this.pushAway(a,b,id,target);
@@ -401,7 +399,7 @@ export class Battle{
   }
  }
  pushAway(a,b,id,target){
-  const origin=this.attackOrigin(a,id,target),dx=target.x-origin.x,dy=target.y-origin.y,dir=Math.abs(dx)>=Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)];
+  const origin=this.attackOrigin(a,id,target),dx=(SKILLS[id].pushFromCaster?b:target).x-origin.x,dy=(SKILLS[id].pushFromCaster?b:target).y-origin.y,dir=Math.abs(dx)>=Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)];
   const from={x:b.x,y:b.y},to={x:b.x+dir[0],y:b.y+dir[1]};
   if(this.cells({...b,...to}).some(p=>!this.inside(p.x,p.y)||!Number.isFinite(TERRAIN[this.tile(p.x,p.y)].cost)||this.at(p.x,p.y)&&this.at(p.x,p.y)!==b)||!Number.isFinite(this.elevationStepCost(b,b,to,1)))return false;
   b.x=to.x;b.y=to.y;b.lastMovedTurn=this.turn;this.events.push({type:'move',id:b.id,from,path:[to],to});this.report(`${this.unitName(b)}が1マス押し出された。`,b);return true;
@@ -415,9 +413,46 @@ export class Battle{
    this.healUnit(u,this.healAmount(u,{healFraction:fraction}));
   }
  }
- act(u,id,target=null){
+ // Pulls follow a shortest cardinal path; walls, cliffs and occupied cells cannot be crossed.
+ pullPath(caster,target,destination){
+  if(!this.canTarget(caster,'curtainPull',target)||!destination||dist(caster,destination)!==1||dist(target,destination)===0||!this.lineClear(target,destination))return null;
+  const max=dist(target,destination),queue=[{x:target.x,y:target.y,path:[]}],visited=new Set([key(target.x,target.y)]);
+  for(let i=0;i<queue.length;i++){
+   const p=queue[i];if(p.x===destination.x&&p.y===destination.y)return p.path;
+   for(const [dx,dy]of DIRS){
+    const q={x:p.x+dx,y:p.y+dy},k=key(q.x,q.y);
+    if(visited.has(k)||p.path.length+1+dist(q,destination)>max)continue;
+    if(this.cells({...target,...q}).some(cell=>!this.inside(cell.x,cell.y)||!Number.isFinite(TERRAIN[this.tile(cell.x,cell.y)].cost)||(this.at(cell.x,cell.y)&&this.at(cell.x,cell.y)!==target)))continue;
+    if(!Number.isFinite(this.elevationStepCost(target,p,q,1)))continue;
+    visited.add(k);queue.push({...q,path:[...p.path,q]});
+   }
+  }
+  return null;
+ }
+ pullDestinations(caster,target){return DIRS.map(([dx,dy])=>({x:caster.x+dx,y:caster.y+dy})).filter(p=>this.pullPath(caster,target,p));}
+ pullAlly(caster,id,target,destination){
+  const path=this.pullPath(caster,target,destination);if(!path)return false;
+  const s=SKILLS[id],from={x:target.x,y:target.y},travelled=[];
+  caster.ap=0;caster.cd[id]=s.cd;caster.uses[id]=(caster.uses[id]||0)+1;
+  this.events.push({type:'skill',id:caster.id,skill:id});this.report(`${caster.name}「${s.name}」`,caster);
+  for(const p of path){
+   target.facing={x:p.x-target.x,y:p.y-target.y};target.x=p.x;target.y=p.y;travelled.push({...p});
+   this.enterTerrain(target);if(target.hp<=0)break;
+  }
+  target.lastMovedTurn=this.turn;this.events.push({type:'move',id:target.id,from,path:travelled,to:{x:target.x,y:target.y}});
+  this.report(`${target.name}を(${target.x+1},${target.y+1})へ移動させた。`,target);
+  if(target.hp>0)this.collectItems(target);this.onMove?.(target,travelled);this.updateVision();this.checkEnd();return true;
+ }
+ enterTerrain(u){
+  const t=this.tile(u.x,u.y);
+  if(t==='thorn'||t==='charge')this.hurt(u,Math.floor(u.maxHp*.1),'地形');
+  if(t==='charge'&&this.random()<.5)this.setStatus(u,'paralysis',3,u.team);
+  if(t==='lava'){this.setStatus(u,'burn',5,u.team);this.setStatus(u,'lavaSlow',3,u.team);}
+  if(t==='sound')this.setStatus(u,'exposed',3,u.team);
+ }
+ act(u,id,target=null,destination=null){
   if(this.result||this.pendingExit||u.team!==this.phase||this.available(u,id))return false;
-  const s=SKILLS[id];if(s.passive)return false;if(s.kind==='transform')return this.transform(u);
+  const s=SKILLS[id];if(s.passive)return false;if(s.kind==='transform')return this.transform(u);if(s.kind==='relocate')return this.pullAlly(u,id,target,destination);
   let targets=this.targets(u,id,target,true);
   if(!s.shape||s.singleTarget){if(!target)return false;targets=targets.filter(v=>v.id===target.id);}
   if(!targets.length&&id!=='phenomena')return false;
@@ -431,6 +466,10 @@ export class Battle{
    if(s.kind==='heal'&&this.healUnit(t,this.healAmount(t,s)))for(const e of this.living(u.team==='ally'?'enemy':'ally'))if(e.hate[t.id]>0)e.hate[u.id]=(e.hate[u.id]||0)+1;
    if(s.kind==='debuff'){if(s.checkHit&&this.random()*100<this.forecast(u,t,id).evade){this.report(t.name+'：回避。',t);this.events.push({type:'miss',id:t.id});continue;}const before=this.movementLimit(t);this.setBuff(t,s.stat,s.amount,s.duration,u.team);t.mp=Math.max(0,t.mp-Math.max(0,before-this.movementLimit(t)));}
    if(s.kind==='buff')for(const stat of s.stat==='guard'?['def','res']:[s.stat])this.setBuff(t,stat,s.amount,s.duration,u.team);
+  }
+  if(s.kind==='attack'&&targets.some(t=>t.hp===0)&&this.skills(u).includes('cleanup')&&u.cleanupTurn!==this.turn){
+   u.cleanupTurn=this.turn;const before=u.mp;u.mp=Math.min(this.movementLimit(u),u.mp+SKILLS.cleanup.move);u.cleanupRecovery=u.mp-before;
+   this.report(`${u.name}「後片づけ」：移動力が${u.cleanupRecovery}回復した。`,u);
   }
   this.updateVision();this.checkEnd();return true;
  }
@@ -482,7 +521,7 @@ export class Battle{
    for(const [stat,b]of Object.entries(u.buffs))for(const sign of ['positive','negative'])if(b[sign]?.source===team&&--b[sign].turns<=0){delete b[sign];this.report(`${u.name}の${{atk:'攻撃',def:'防御',mag:'神秘',res:'抗秘',speed:'迅速',move:'移動力'}[stat]??stat}${sign==='negative'?'低下':'上昇'}が終了した。`,u);}
    if(u.team!==team||u.hp<=0)continue;
    for(const id of Object.keys(u.cd))u.cd[id]=Math.max(0,u.cd[id]-1);
-   u.waited=false;u.movementSpent=0;u.movementLocked=false;u.ap=u.status.paralysis?0:1;u.mp=this.movementLimit(u);
+   u.cleanupRecovery=0;u.waited=false;u.movementSpent=0;u.movementLocked=false;u.ap=u.status.paralysis?0:1;u.mp=this.movementLimit(u);
    if(this.turn%2===0)for(const id of Object.keys(u.hate))u.hate[id]=Math.max(0,u.hate[id]-1);
   }
   for(const u of this.living(team))if(u.status.burn)for(const v of this.living())if(v!==u&&dist(u,v)===1&&!v.status.burn&&this.random()<.15)this.setStatus(v,'burn',5,team);

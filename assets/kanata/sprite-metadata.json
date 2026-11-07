@@ -1,0 +1,62 @@
+{
+  "character": "カナタ / Kanata",
+  "canvas_px": [
+    256,
+    256
+  ],
+  "anchor_top_left_px": [
+    128,
+    248
+  ],
+  "sheet_order": "D0 to D7, top to bottom",
+  "frames": [
+    {
+      "direction": "D0",
+      "label": "Front",
+      "filename": "kanata_fan_idle_d00_f00.png",
+      "sha256": "d36b8806f8f67d2f3c9253c0705d073ea0bcd4be61cfcb7be90a043a47b4acd9"
+    },
+    {
+      "direction": "D1",
+      "label": "Front-right",
+      "filename": "kanata_fan_idle_d01_f00.png",
+      "sha256": "58e31db80a0dde563e962ee68c5df7d895ef525f1e227750f2a4c22ecedaa9ff"
+    },
+    {
+      "direction": "D2",
+      "label": "Right",
+      "filename": "kanata_fan_idle_d02_f00.png",
+      "sha256": "0173d203197e908f64616a2a931c6cee5c9d89ec34789f1b0fcf090e63048c84"
+    },
+    {
+      "direction": "D3",
+      "label": "Rear-right",
+      "filename": "kanata_fan_idle_d03_f00.png",
+      "sha256": "a5f6cdf9670f7f0d71d6e2597b5b337f798d18bb82993f8dc5892219d8fb7ddd"
+    },
+    {
+      "direction": "D4",
+      "label": "Back",
+      "filename": "kanata_fan_idle_d04_f00.png",
+      "sha256": "c93672dcac9c58da1f958f7bd4f5ed3178099cda4d8d91c7834cdee0040889f5"
+    },
+    {
+      "direction": "D5",
+      "label": "Rear-left",
+      "filename": "kanata_fan_idle_d05_f00.png",
+      "sha256": "1660b9a967349a9b9e15ff9d7d160c91e1a225509da05a65db9aab05446b23c7"
+    },
+    {
+      "direction": "D6",
+      "label": "Left",
+      "filename": "kanata_fan_idle_d06_f00.png",
+      "sha256": "f94c07361ee4d7e94ef1e6eff56b8da0ac4e9465ecd3990ad8abb76a4c429b17"
+    },
+    {
+      "direction": "D7",
+      "label": "Front-left",
+      "filename": "kanata_fan_idle_d07_f00.png",
+      "sha256": "4aca2f5668f5564536890a54aff2e658ab9a0f6544f2c0565f4475ccf7716950"
+    }
+  ]
+}

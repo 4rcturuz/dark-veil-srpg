@@ -1,4 +1,5 @@
 import {TERRAIN,STATUS_NAMES} from './data.js';
+import {effectColor,RANGE_COLORS} from './combat-display.js';
 import {key} from './engine.js';
 import {drawCharacterSprite,directionFrame} from './character-sprites.js';
 import {sampleMovement} from './movement.js';
@@ -10,6 +11,7 @@ export function unitStatusLabels(u){
  if(u.hp<=0)return [];
  const labels=Object.entries(u.status).filter(([id])=>STATUS_NAMES[id]).map(([id,s])=>`${STATUS_NAMES[id]} ${id==='doom'?s.stacks.length:s.turns}`);
  for(const [id,b]of Object.entries(u.buffs))if(b.negative)labels.push(`${{move:'移動',atk:'攻撃',def:'防御',mag:'神秘',res:'抗秘',speed:'迅速'}[id]??id}低下 ${b.negative.turns}`);
+ if(u.cleanupRecovery)labels.push(`移動力回復 +${u.cleanupRecovery}`);
  return labels;
 }
 export const EMOTE_SYMBOLS={awakening:'☾',sunlight:'！',question:'？',frustrated:'〰',footsteps:'♪',key:'⚿',locked:'〰',unlock:'⚿',tears:'💧',surprise:'！',idea:'💡',ears:'♪'};
@@ -275,8 +277,8 @@ export class MapView{
    }
    c.globalAlpha=1;
    if(reachable.has(k)&&st.selected?.team==='ally'&&st.mode==='move'&&k!==key(st.selected.x,st.selected.y)){poly(c,diamond,'#4797d9eb','#b7e0ff');}
-    if(targetRangeSet.has(k)&&visible)poly(c,diamond,'#8b739deb','#e5d6ff');
-    if(areaSet.has(k)&&visible)poly(c,diamond,['tideBlessing','waltz','bastion','guidance'].includes(st.mode)?'#5ea984eb':'#d66d57eb','#ffe0c7');
+    if(targetRangeSet.has(k)&&visible)poly(c,diamond,RANGE_COLORS.casting,'#e5d6ff');
+    if(areaSet.has(k)&&visible)poly(c,diamond,effectColor(st.selected,st.mode==='move'?'attack':st.mode),'#ffe0c7');
    if(visible&&st.danger){if(st.danger.now.has(k))poly(c,diamond,'#c34c49bf','#ffc1a4');else if(st.danger.after.has(k))poly(c,diamond,'#aa41455e','#ce837e');}
    if(visible&&warning.has(k)){poly(c,diamond,'#ec8732af','#ffe5a3');c.save();c.beginPath();diamond.forEach(([xx,yy],i)=>i?c.lineTo(xx,yy):c.moveTo(xx,yy));c.closePath();c.clip();for(let v=-42;v<43;v+=8)line(c,[[v-12,16],[v+12,-16]],'#ffe6adb0',2);c.restore();}
    if(this.hover?.x===x&&this.hover?.y===y){poly(c,diamond,'#dbc89918','#efdb9c');}

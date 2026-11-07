@@ -54,7 +54,7 @@ export function parseDatabase(files){
   requireRef(weapons,c.weapon_id,c.id);requireRef(items,c.armor_id,c.id);
   if(items.get(c.armor_id).category!=='armor')throw Error(`${c.id}: armor_idは防具ではありません`);
   for(const equip of [weapons.get(c.weapon_id),items.get(c.armor_id)])if(!equip.usable_by.includes('*')&&!equip.usable_by.includes(c.id))throw Error(`${c.id}: 初期装備 ${equip.id} を使用できません`);
-  if(c.skill_ids.length<1||c.skill_ids.length>4||new Set(c.skill_ids).size!==c.skill_ids.length)throw Error(`${c.id}: スキルは重複なしの1～4個です`);
+  if(c.skill_ids.length<1||c.skill_ids.length>5||new Set(c.skill_ids).size!==c.skill_ids.length)throw Error(`${c.id}: スキルは重複なしの1～5個です`);
   if(c.wolf_move>0&&(!c.wolf_passive||!c.skill_ids.includes('metamorphosis')))throw Error(`${c.id}: 狼形態には形象変化と狼パッシブの指定が必要です`);
   if(!c.wolf_move&&(c.wolf_passive||c.wolf_sight))throw Error(`${c.id}: 狼形態の定義が不完全です`);
  }

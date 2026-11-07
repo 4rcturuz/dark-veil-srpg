@@ -62,7 +62,7 @@ export class CemeteryBattle extends Battle{
  }
  move(u,x,y){if(this.scripted||this.messages.some(m=>m.kind!=='combat'))return false;return this.operation('movement',()=>{this.moving=true;try{return super.move(u,x,y);}finally{this.moving=false;}});}
  onMove(u,path){if(u.team==='ally'&&path.length){this.completedMove=u.id;if(path.some(p=>this.inGoal(p)))this.arrivalCandidate=u.id;}}
- act(u,id,target){if(this.scripted)return false;return this.operation('action',()=>{const ok=super.act(u,id,target);if(ok&&id==='tideBlessing')u.lastHealTurn=this.turn;return ok;});}
+ act(u,id,target,destination=null){if(this.scripted)return false;return this.operation('action',()=>{const ok=super.act(u,id,target,destination);if(ok&&id==='tideBlessing')u.lastHealTurn=this.turn;return ok;});}
  useItem(u,id,target){if(this.scripted)return false;return this.operation('item',()=>{const ok=super.useItem(u,id,target);if(ok&&ITEMS[id].effect==='heal')u.lastHealTurn=this.turn;if(ok&&this.collected[ITEMS[id].name]>0)this.collected[ITEMS[id].name]--;return ok;});}
  enemyStep(u){if(this.scripted)return;return this.operation('enemy-action',()=>{if(!u.ap||u.hp<=0||u.status.paralysis||this.phase!=='enemy')return;if(u.heavy)return bossStep(this,u);return ordinaryStep(this,u,()=>super.enemyStep(u));});}
  endPhase(){if(this.scripted||this.pendingExit)return;if(this.phase==='ally'&&this.flow==='exploration'&&this.shouldExit('end-ally')){this.pendingExit=true;return;}const reason=this.phase==='ally'?'end-ally':'end-enemy';return this.operation(reason,()=>super.endPhase());}

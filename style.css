@@ -17,6 +17,7 @@
 /* Visual/text split: 70:30 of the content area, with no dialog above the map. */
 .battle-app{height:100vh;height:100dvh;min-height:560px;display:grid;grid-template-rows:60px minmax(240px,7fr) minmax(150px,3fr) 48px}
 .battle-top,.battle-bottom{height:auto;min-height:0}.battle-body{min-height:0;overflow:hidden}.battle-map-wrap{min-height:0}
+.enemy-phase-status{position:absolute;top:0;left:14px;right:14px;height:28px;display:flex;align-items:center;justify-content:center;color:#ffb5a3;background:#24343d;font-size:var(--dialogue-font-size,18px);z-index:2}.enemy-phase-status[hidden]{display:none}.battle-text-field:has(.enemy-phase-status:not([hidden])){padding-top:30px}.legend-square.support{background:#5ea984}
 .battle-text-field{position:relative;min-height:0;overflow:hidden;border-top:1px solid #cdb87970;background:linear-gradient(115deg,#203941,#10262e);padding:0 24px}
 #battle-text,#forecast-container{height:100%;min-height:0;overflow:auto}#battle-text:empty,#forecast-container:empty{display:none}
 .battle-text-field:has(#battle-text:not(:empty)) #forecast-container{display:none}

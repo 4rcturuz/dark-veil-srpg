@@ -76,6 +76,7 @@ move [number]：移動力
 sight [number]：視界
 attack_range [number]：基本攻撃射程
 magic_attack [boolean]：基本攻撃に神秘を使用
+attack_style [enum]：通常攻撃の表示色。melee=近接（赤）、ranged=遠距離（紫）。個別スキルのattackStyle指定を優先。
 critical_rate [number]：会心率。百分率
 status_resistance [number]：状態異常耐性。百分率
 skill_ids [list]：装着スキルID。|区切り。定義はdata.jsのSKILLS
@@ -112,6 +113,7 @@ move [number]：移動力
 sight [number]：視界
 attack_range [number]：基本攻撃射程
 magic_attack [boolean]：基本攻撃に神秘を使用
+attack_style [enum]：通常攻撃の表示色。melee=近接（赤）、ranged=遠距離（紫）。個別スキルのattackStyle指定を優先。
 critical_rate [number]：会心率。百分率
 status_resistance [number]：状態異常耐性。百分率
 skill_ids [list]：装着スキルID。|区切り。定義はdata.jsのSKILLS
@@ -169,3 +171,5 @@ available_by_default [boolean]：1は所持取得なしで準備画面に出す�
 collectible [boolean]：1は報酬・所持武器に登録可能
 source [text]：移行元資料
 notes [text]：暫定値・未設定事項などの開発メモ。ゲームには表示しない
+
+α0.31：カナタを操作ユニットとして追加。skill_idsは重複なしの1～5件。通常攻撃の表示分類attack_styleをcharacters/enemies双方へ追加。カナタの未指定能力・成長値・防具・武器追加補正はnotesに暫定と明記。影縫いは固有武器未装備時のみ使用可能。

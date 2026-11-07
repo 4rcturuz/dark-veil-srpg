@@ -14,6 +14,7 @@ export const characterSprites=new CharacterSprites();
 
 // Uploaded sheets are retained byte for byte. Rows are D0–D7, 256×256 each.
 export const SHEET_SPRITES={
+ kanata:{src:'assets/kanata/idle-sheet.png',frameWidth:256,frameHeight:256,frames:8,anchor:[128,248]},
  // Midpoint of the two boot contacts in each source row, rather than the lowest pixel.
  hoshiyomi:{src:'assets/hoshiyomi/idle-sheet.png',frameWidth:256,frameHeight:256,frames:8,anchor:[125,241],anchors:[[125,241],[124,232],[132,235],[120,241],[126,241],[133,237],[120,229],[124,228]]},
  hoshiyomiWolf:{src:'assets/hoshiyomi/wolf-idle-sheet.png',frameWidth:256,frameHeight:256,frames:8,anchor:[128,240],anchors:[[130,242],[129,238],[128,232],[128,229],[128,230],[128,230],[128,230],[128,239]]},
