@@ -1,7 +1,7 @@
 import {drawEventCharacter} from './render.js';
 import {intermissionStaging} from './intermission-state.js';
 import {CATHEDRAL_CAMERA,CATHEDRAL_DOOR,CATHEDRAL_REAR,CATHEDRAL_ROAD_PATHS,cathedralCameraFrame,pathLength,sampleEventPath} from './intermission-camera.js';
-import {roadEntranceActors,roadExitPaths,roadBackgroundFrame} from './intermission-road.js';
+import {roadEntranceActors,roadExitPaths,roadBackgroundFrame,RoadWalk,ROAD_STEP_MS} from './intermission-road.js';
 import {cemeteryEntrancePaths,cemeteryBackgroundFrame} from './intermission-cemetery.js';
 
 const MOVEMENT_SPEED=.75,STEP_MS=320/MOVEMENT_SPEED;
@@ -28,7 +28,7 @@ export class IntermissionView{
   this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(canvas);this.resize();this.frame();
  }
  resize(){const r=this.canvas.getBoundingClientRect();this.w=r.width;this.h=r.height;this.dpr=Math.min(window.devicePixelRatio||1,2);this.canvas.width=Math.round(this.w*this.dpr);this.canvas.height=Math.round(this.h*this.dpr);}
- destroy(){this.alive=false;cancelAnimationFrame(this.raf);this.observer.disconnect();this.motion?.resolve(false);this.motion=null;this.cancelDeparture();this.resolveBackground(false);this.cancelRoadBackground();this.cancelCemeteryBackground();}
+ destroy(){this.roadWalk?.ready?.(false);this.alive=false;cancelAnimationFrame(this.raf);this.observer.disconnect();this.motion?.resolve(false);this.motion=null;this.cancelDeparture();this.resolveBackground(false);this.cancelRoadBackground();this.cancelCemeteryBackground();}
  prepareScene(scene){return scene==='cathedral'?this.backgroundReady:scene==='road'?this.roadBackgroundReady:scene==='cemetery'?this.cemeteryBackgroundReady:Promise.resolve(true);}
  prepareEntrance(){if(this.page===0&&this.actors.astarthe)this.actors.astarthe={...CATHEDRAL_DOOR};}
  prepareRoadEntrance(){if(this.page===24)this.actors=roadEntranceActors();}
@@ -46,24 +46,42 @@ export class IntermissionView{
  }
  leaveRoad(){
   if(!this.alive||this.stage?.scene!=='road')return null;
+  this.roadWalk?.update(performance.now());this.roadWalk=null;
   this.cancelDeparture();this.motion?.resolve(false);this.motion=null;this.stage={...this.stage,emotes:{},staff:false};
-  const paths=roadExitPaths(this.actors),duration=Math.max(...Object.values(paths).map(pathLength))*STEP_MS;
+  const paths=roadExitPaths(this.actors),duration=Math.max(...Object.values(paths).map(pathLength))*ROAD_STEP_MS;
   // Start darkening only once the last character has reached the right edge.
-  const fadeAt=Math.max(0,12.8-Math.min(...Object.values(this.actors).map(p=>p.x)))*STEP_MS;
-  const d={paths,duration,start:performance.now(),fadeAt,fadeSignalled:false,followCamera:false};
+  const fadeAt=Math.max(0,12.8-Math.min(...Object.values(this.actors).map(p=>p.x)))*ROAD_STEP_MS;
+  const d={paths,duration,start:performance.now(),fadeAt,fadeSignalled:false,followCamera:false,stepMs:ROAD_STEP_MS};
   const done=new Promise(resolve=>d.resolve=resolve),fading=new Promise(resolve=>d.fadeResolve=resolve);this.departure=d;return {done,fading};
  }
  updateDeparture(time){
   const d=this.departure;if(!d)return;
   const elapsed=Math.max(0,time-d.start);
-  for(const [id,path]of Object.entries(d.paths))this.actors[id]=sampleEventPath(path,elapsed/STEP_MS);
+  for(const [id,path]of Object.entries(d.paths))this.actors[id]=sampleEventPath(path,elapsed/(d.stepMs??STEP_MS));
   // Keep Astarthe at the opening composition while panning with her. The crop clamps to the image.
   if(d.followCamera!==false){const a=this.actors.astarthe;this.camera={x:a.x*100+25,y:a.y*100-195};}
   if(!d.fadeSignalled&&elapsed>=d.fadeAt){d.fadeSignalled=true;d.fadeResolve(Math.max(1,d.duration-elapsed));}
   if(elapsed>=d.duration){this.departure=null;d.resolve(true);}
  }
  setPage(index,animate=true){
-  this.cancelDeparture();this.motion?.resolve(false);this.motion=null;const next=intermissionStaging(index),changed=this.stage?.scene!==next.scene;
+  const now=performance.now();this.updateMotion(now);this.roadWalk?.update(now);
+  this.cancelDeparture();const next=intermissionStaging(index),changed=this.stage?.scene!==next.scene;
+  if(next.scene==='road'&&animate&&!changed){
+   this.stage=next;this.page=index;this.pageTime=now;
+   if(index>=40){
+    this.roadWalk=null;this.motion?.resolve(false);this.motion=null;
+    const to=intermissionStaging(index).actors,x=this.actors.astarthe.x;
+    for(const p of Object.values(to))p.x+=x-next.actors.astarthe.x;
+    const from=structuredClone(this.actors),duration=Math.max(...Object.keys(from).map(id=>Math.hypot(to[id].x-from[id].x,to[id].y-from[id].y)))*ROAD_STEP_MS;
+    if(duration<1){this.actors=to;return Promise.resolve(true);}
+    return new Promise(resolve=>this.motion={from,to,start:now,duration,resolve});
+   }
+   this.motion?.resolve(false);this.motion=null;
+   this.roadWalk??=new RoadWalk(this.actors,index,now);this.roadWalk.setPage(index,now);
+   if(index===24&&this.actors.hoshiyomi.x<.4)return new Promise(resolve=>this.roadWalk.ready=resolve);
+   return Promise.resolve(true);
+  }
+  this.roadWalk=null;this.motion?.resolve(false);this.motion=null;
   if(changed)this.camera={...CATHEDRAL_CAMERA};
   const from={};for(const [id,p]of Object.entries(next.actors))from[id]={...(changed?p:this.actors[id]??p)};
   if(index===0&&animate)from.astarthe={...CATHEDRAL_DOOR};
@@ -88,6 +106,7 @@ export class IntermissionView{
   const c=this.ctx;c.setTransform(this.dpr,0,0,this.dpr,0,0);c.fillStyle='#162d35';c.fillRect(0,0,this.w,this.h);if(!this.stage)return;
   this.updateDeparture(time);
   this.updateMotion(time);
+  this.roadWalk?.update(time);
   const scale=Math.min(this.w/1280,this.h/600);c.save();c.translate((this.w-1280*scale)/2,(this.h-600*scale)/2);c.scale(scale,scale);
   c.beginPath();c.rect(0,0,1280,600);c.clip();
   const sky=c.createLinearGradient(0,0,0,600);sky.addColorStop(0,'#263c48');sky.addColorStop(.5,'#82908b');sky.addColorStop(1,'#263f42');c.fillStyle=sky;c.fillRect(0,0,1280,600);
@@ -96,7 +115,7 @@ export class IntermissionView{
   for(const [id,p]of Object.entries(this.actors).sort((a,b)=>a[1].y-b[1].y)){
    const path=this.motion?.paths?.[id];
    const moving=path?(time-this.motion.start)/STEP_MS<pathLength(path):this.motion&&Math.hypot(this.motion.to[id].x-this.motion.from[id].x,this.motion.to[id].y-this.motion.from[id].y)>.001;
-   const walking=moving||!!this.departure,bob=walking?Math.sin(time*MOVEMENT_SPEED/150+(id==='umine'?1:2))*2:0;
+   const walking=moving||!!this.departure||!!this.roadWalk?.moving,bob=walking?Math.sin(time*MOVEMENT_SPEED/150+(id==='umine'?1:2))*2:0;
    const jump=id==='umine'&&this.page===9?Math.max(0,Math.sin(Math.min(1,(time-this.pageTime)/550)*Math.PI))*28:0;
    c.save();c.translate(p.x*100,p.y*100);c.scale(1.85,1.85);
    drawEventCharacter(c,id,0,0,time,p.direction,(jump-bob)/1.85);

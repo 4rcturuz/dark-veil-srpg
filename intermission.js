@@ -39,7 +39,7 @@ export class IntermissionPlayer{
   this.scene=page.scene;
   if(changed){await this.view.setPage(index,false);if(!this.alive||generation!==this.generation)return;if(initial&&index===0)this.view.prepareEntrance?.();if(!initial&&index===24)this.view.prepareRoadEntrance?.();if(!initial&&index===43)this.view.prepareCemeteryEntrance?.();this.view.draw(performance.now());if(!await this.fade(0))return;}
   // Reconstruct a saved page without replaying entrance movement; a fresh event walks out of the door.
-  const movement=!initial||index===0?this.view.setPage(index,true):Promise.resolve(true);
+  const movement=!initial||index===0||page.scene==='road'?this.view.setPage(index,true):Promise.resolve(true);
   // Road dialogue is readable during its walk; the gift is handed over after approaching.
   if(page.scene!=='road'||page.gift)await movement;
   if(!this.alive||generation!==this.generation)return;

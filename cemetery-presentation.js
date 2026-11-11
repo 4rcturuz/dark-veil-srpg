@@ -1,6 +1,6 @@
 import {faceIconMarkup} from './face-icons.js';
 
-// Staging uses replaceable geometric scenery until the final event artwork arrives.
+// Staging shares the map artwork, including the separate Adarius body and pedestal.
 export async function playCemeteryScene(action,{battle:b,view:v,fade,banner,sound,alive,caption,cutin}){
  const pan=p=>v.panTo(p),walk=async moves=>{for(const [id,path,direction]of moves)b.sceneMove(id,path,direction);await v.animateMoves();};
  switch(action){
@@ -27,7 +27,7 @@ export async function playCemeteryScene(action,{battle:b,view:v,fade,banner,soun
   case 'turn-back':b.units.find(u=>u.id==='astarthe').eventDirection=0;await new Promise(r=>setTimeout(r,240));if(alive())b.units.find(u=>u.id==='hoshiyomi').eventDirection=0;break;
   case 'ambush':
    b.map.statue.lungeStart=performance.now();await walk([['astarthe',[[10,23],[10,22],[11,22]],2],['hoshiyomi',[[12,22],[12,21]],0],['umine',[[14,23],[14,22],[13,22]],6]]);
-   if(!alive())return;sound('stone');await fade(1,100,'#fff');if(!alive())return;delete b.map.statue.lungeStart;b.map.gate.ruined=true;v.draw(performance.now());await fade(0,250,'#fff');break;
+   if(!alive())return;sound('stone');await fade(1,100,'#fff');if(!alive())return;delete b.map.statue.lungeStart;b.map.statue.bodyDisplaced=true;b.map.gate.ruined=true;v.draw(performance.now());await fade(0,250,'#fff');break;
   case 'boss-setup':b.startBoss();await pan(b.center());if(alive())await banner('BATTLE START',1000);break;
   case 'enemy-first':return {enemyFirst:true};
   case 'boss-collapse':{

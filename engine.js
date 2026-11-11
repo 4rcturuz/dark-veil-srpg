@@ -286,7 +286,7 @@ export class Battle{
  // Area travel is not a turn: refill budgets without ticking any duration or CT.
  refreshAreaActions(){for(const u of this.units.filter(u=>u.team==='ally')){u.waited=false;u.movementSpent=0;u.movementLocked=false;u.ap=u.hp>0&&!u.status.paralysis?1:0;u.mp=u.hp>0?this.movementLimit(u):0;}}
  movementLimit(u){if(u.status.paralysis)return 0;const base=Math.max(0,Math.floor((this.effective(u,'move')-(u.status.lavaSlow?2:0))*(u.status.freeze?.5:1)));return u.status.shadowPin?Math.max(1,base-2):base;}
- setBuff(u,stat,amount,turns,source){u.buffs[stat]??={};u.buffs[stat][amount<0?'negative':'positive']={amount,turns,source};const name={atk:'攻撃',def:'防御',mag:'神秘',res:'抗秘',speed:'迅速',move:'移動力'}[stat]??stat;this.report(`${u.name}：${name}${amount<0?'低下':'上昇'} ${stat==='move'?Math.abs(amount):Math.round(Math.abs(amount)*100)+'%'}（${turns}ターン）。`,u);}
+ setBuff(u,stat,amount,turns,source,skillId=null){u.buffs[stat]??={};u.buffs[stat][amount<0?'negative':'positive']={amount,turns,source,skillId};const name={atk:'攻撃',def:'防御',mag:'神秘',res:'抗秘',speed:'迅速',move:'移動力'}[stat]??stat;this.report(`${u.name}：${name}${amount<0?'低下':'上昇'} ${stat==='move'?Math.abs(amount):Math.round(Math.abs(amount)*100)+'%'}（${turns}ターン）。`,u);}
  triggerHundredCuts(u){
   const s=SKILLS.hundredcuts,before=this.movementLimit(u);
   this.setBuff(u,'move',s.move,s.duration,u.team);this.setBuff(u,'atk',s.amount,s.duration,u.team);
@@ -296,13 +296,14 @@ export class Battle{
  forecast(a,b,skill='attack',target=b){
   const s=SKILLS[skill],magic=s.magic??a.magic,ranged=dist(a,b)>1;
   const offense=this.effective(a,magic?'mag':'atk'),defense=this.effective(b,magic?'res':'def');
-  const baseEvade=clamp(15+(this.effective(b,'speed',ranged)/(this.effective(a,'speed')*(s.accuracySpeedMultiplier??1))-1)*50,5,75),pair=this.attackPair(a,b,skill,target),heightDifference=this.elevationDifference(pair.origin,pair.target),accuracyModifier=elevationAccuracy(this.elevationAt(pair.origin),this.elevationAt(pair.target)),evade=clamp(baseEvade-accuracyModifier,0,100),multiplier=s.damageMultiplier??1;
+  const baseEvade=clamp(15+(this.effective(b,'speed',ranged)/(this.effective(a,'speed')*(s.accuracySpeedMultiplier??1)*this.skills(a).reduce((n,id)=>n*(SKILLS[id]?.passive&&SKILLS[id].appliesTo?.includes(skill)?SKILLS[id].accuracySpeedMultiplier:1),1))-1)*50,5,75),pair=this.attackPair(a,b,skill,target),heightDifference=this.elevationDifference(pair.origin,pair.target),accuracyModifier=elevationAccuracy(this.elevationAt(pair.origin),this.elevationAt(pair.target)),evade=clamp(baseEvade-accuracyModifier,0,100),multiplier=s.damageMultiplier??1;
   return {damage:Math.max(0,Math.floor((offense*(s.power??1)-defense*.5)*multiplier)),min:Math.max(0,Math.floor((offense*(s.power??1)*.95-defense*.5)*multiplier)),max:Math.max(0,Math.floor((offense*(s.power??1)*1.05-defense*.5)*multiplier)),hit:Math.floor(100-evade),evade,accuracyModifier,heightDifference,effectiveRange:this.effectiveRange(pair.origin,pair.target,skill),crit:this.effective(a,'crit'),magic};
  }
  available(u,id){
   const s=SKILLS[id];if(!s||!u.equipped.includes(id))return '未装着';
   if(u.hp<=0||u.waited||u.status.paralysis||!u.ap&&!s.freeAction)return '行動済み';
   if(s.kind==='transform'&&!u.wolf_move)return '形態未設定';
+  if(s.noRefresh&&Object.values(u.buffs).some(b=>Object.values(b).some(v=>v?.skillId===id&&v.turns>0)))return '効果中';
   if(s.oncePerTurn&&u.transformedTurn===this.turn)return 'このターン使用済み';
   if(s.excludesWeapon&&u.weapon===s.excludesWeapon)return '固有武器装備中';
   if(s.requires&&u.weapon!==s.requires&&u.armor!==s.requires)return '必要装備なし';
@@ -325,6 +326,7 @@ export class Battle{
   else if(s.directional){
    if(target&&near(u,target)>0){const dx=target.x-u.x,dy=target.y-u.y,dir=Math.abs(dx)>=Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)];
     if(s.shape==='front3'||s.shape==='front6')for(let depth=1;depth<=(s.shape==='front6'?2:1);depth++)for(let side=-1;side<=1;side++)add(u.x+dir[0]*depth-dir[1]*side,u.y+dir[1]*depth+dir[0]*side);
+    else if(s.shape==='fan')for(let depth=1;depth<=s.depth;depth++)for(let side=1-depth;side<depth;side++)add(u.x+dir[0]*depth-dir[1]*side,u.y+dir[1]*depth+dir[0]*side);
     else if(s.shape==='rectangle')for(let depth=1;depth<=s.depth;depth++)for(let side=-Math.floor(s.width/2);side<=Math.floor(s.width/2);side++)add(u.x+dir[0]*depth-dir[1]*side,u.y+dir[1]*depth+dir[0]*side);
     else if(s.shape==='cone')for(let depth=1;depth<=3;depth++)for(let side=-Math.floor((depth-1)/2);side<=Math.ceil((depth-1)/2);side++){const x=u.x+dir[0]*depth-dir[1]*side,y=u.y+dir[1]*depth+dir[0]*side;if(this.lineClear(u,{x,y}))add(x,y);}
    }
@@ -459,13 +461,13 @@ export class Battle{
   if(s.kind==='heal'&&targets.every(t=>t.hp>=this.effective(t,'maxHp')))return false;
   if(s.directional&&(!target||near(u,target)===0))return false;
   if(target&&near(u,target)>0)u.facing={x:target.x-u.x,y:target.y-u.y};
-  u.ap=0;if(s.cd)u.cd[id]=s.cd;if(s.uses)u.uses[id]=(u.uses[id]||0)+1;this.events.push({type:'skill',id:u.id,skill:id});this.report(`${this.unitName(u)}「${s.name}」`,u.team==='ally'||this.isVisible(u)?u:targets.find(t=>t.team==='ally')??u);
+  u.ap=0;if(s.cd)u.cd[id]=s.cd;if(s.uses)u.uses[id]=(u.uses[id]||0)+1;this.events.push({type:'skill',id:u.id,skill:id,...(s.visualShots&&target?{target:{x:target.x,y:target.y}}:{})});this.report(`${this.unitName(u)}「${s.name}」`,u.team==='ally'||this.isVisible(u)?u:targets.find(t=>t.team==='ally')??u);
   if(id==='phenomena')for(const p of this.area(u,id)){const t=this.tile(p.x,p.y);if(TERRAIN[t].breakable)this.map.grid[p.y][p.x]=t==='crack'?'rubble':'plain';}
   for(const t of targets){
    if(s.kind==='attack')this.hit(u,t,id,target);
    if(s.kind==='heal'&&this.healUnit(t,this.healAmount(t,s)))for(const e of this.living(u.team==='ally'?'enemy':'ally'))if(e.hate[t.id]>0)e.hate[u.id]=(e.hate[u.id]||0)+1;
    if(s.kind==='debuff'){if(s.checkHit&&this.random()*100<this.forecast(u,t,id).evade){this.report(t.name+'：回避。',t);this.events.push({type:'miss',id:t.id});continue;}const before=this.movementLimit(t);this.setBuff(t,s.stat,s.amount,s.duration,u.team);t.mp=Math.max(0,t.mp-Math.max(0,before-this.movementLimit(t)));}
-   if(s.kind==='buff')for(const stat of s.stat==='guard'?['def','res']:[s.stat])this.setBuff(t,stat,s.amount,s.duration,u.team);
+   if(s.kind==='buff'){const before=this.movementLimit(t);for(const stat of s.stat==='guard'?['def','res']:[s.stat])this.setBuff(t,stat,s.amount,s.duration,u.team,id);if(s.stat==='move'&&t.hp>0&&!t.waited&&!t.status.paralysis&&!t.movementLocked)t.mp=Math.min(this.movementLimit(t),t.mp+Math.max(0,this.movementLimit(t)-before));}
   }
   if(s.kind==='attack'&&targets.some(t=>t.hp===0)&&this.skills(u).includes('cleanup')&&u.cleanupTurn!==this.turn){
    u.cleanupTurn=this.turn;const before=u.mp;u.mp=Math.min(this.movementLimit(u),u.mp+SKILLS.cleanup.move);u.cleanupRecovery=u.mp-before;
@@ -492,7 +494,7 @@ export class Battle{
   if(item.effect==='revive'){target.hp=Math.min(target.maxHp,item.reviveHp);target.ap=0;target.mp=0;target.waited=true;target.status={};}
   else if(item.effect==='heal'){const max=this.effective(target,'maxHp');target.hp=Math.min(max,target.hp+(item.heal||Math.floor(max*item.fraction)));}
   else if(item.effect==='cure'){for(const k of item.cureStatuses)if(target.status[k])this.removeStatus(target,k);}
-  else if(item.effect==='feral'){const before=this.movementLimit(target);this.setStatus(target,item.statusId,item.duration,u.team);target.status.feral.multiplier=item.statMultiplier;target.mp+=Math.max(0,this.movementLimit(target)-before);}
+  else if(item.effect==='feral'){const before=this.movementLimit(target);this.setStatus(target,item.statusId,item.duration,u.team);Object.assign(target.status.feral,{multiplier:item.statMultiplier,tickAt:'sourceEnd',skipNextTick:true});target.mp+=Math.max(0,this.movementLimit(target)-before);}
   else if(item.effect==='status')this.setStatus(target,item.statusId,item.duration,u.team);
   this.items[id]--;u.ap=0;if(target.hp>hpBefore){this.events.push({type:'heal',id:target.id,value:target.hp-hpBefore});this.report(`${target.name}のHPが${target.hp-hpBefore}回復。`,target);}this.updateVision();return true;
  }
@@ -504,7 +506,10 @@ export class Battle{
    if(this.tile(u.x,u.y)==='poison'&&this.random()<.5)this.setStatus(u,'poison',5,u.team);
    for(const id of ['poison','burn'])if(u.status[id]){const n=Math.floor(u.maxHp*.025);this.hurt(u,n,id);this.addLog(`${u.name}：${id==='poison'?'毒':'炎上'} ${n}`);}
   }
-  this.healAura(team);this.checkEnd();if(this.result)return;
+  this.healAura(team);
+  // Feral covers the casting turn and three subsequent owner turns, including enemy phases.
+  for(const u of this.units)for(const [id,s]of Object.entries(u.status))if(s.tickAt==='sourceEnd'&&s.source===team){if(s.skipNextTick)s.skipNextTick=false;else if(--s.turns<=0)this.removeStatus(u,id);}
+  this.checkEnd();if(this.result)return;
   if(team==='enemy'){
    if(this.mission.id===2&&this.turn>=8){this.finish(true);return;}
    this.turn++;if(this.turn>this.mission.turns){this.finish(false);return;}
@@ -515,6 +520,7 @@ export class Battle{
   const team=this.phase;
   for(const u of this.units){
    for(const [id,s]of Object.entries(u.status)){
+    if(s.tickAt==='sourceEnd')continue;
     if(id==='doom'){s.stacks=s.stacks.map(v=>({...v,turns:v.turns-(v.source===team?1:0)})).filter(v=>v.turns>0);if(!s.stacks.length)this.removeStatus(u,'doom');continue;}
     if(s.source===team&&--s.turns<=0){this.removeStatus(u,id);if(id==='freeze')this.hurt(u,Math.floor(u.maxHp*.15),'凍傷');}
    }

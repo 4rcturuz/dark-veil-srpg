@@ -1,8 +1,9 @@
-import {TERRAIN,STATUS_NAMES} from './data.js';
+import {TERRAIN,STATUS_NAMES,SKILLS} from './data.js';
 import {effectColor,RANGE_COLORS} from './combat-display.js';
 import {key} from './engine.js';
 import {drawCharacterSprite,directionFrame} from './character-sprites.js';
 import {sampleMovement} from './movement.js';
+import {loadMapArt,MapArtPainter} from './runtime/map-art.js';
 export const ELEVATION_STEP_HEIGHT=40; // One elevation level equals one impassable wall.
 const containsPoint=(pts,x,y)=>{let sign=0;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length],cross=(b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0]);if(Math.abs(cross)<1e-7)continue;const side=Math.sign(cross);if(sign&&sign!==side)return false;sign=side;}return !!sign;};
 const poly=(c,pts,fill,stroke=null)=>{c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.strokeStyle=stroke;c.stroke();}};
@@ -29,14 +30,14 @@ function drawScenery(c,name,x,y,gate=false){
  if(!img.complete||!img.naturalWidth)return false;
  if(gate)c.drawImage(img,x-62.5,y-86,125,99);else c.drawImage(img,x-46,y-91,91,101);return true;
 }
-function sprite(c,u,x,y,selected,time,direction=0,battleUi=true,elevation=0,effectiveMaxHp=null){
+function sprite(c,u,x,y,selected,time,direction=0,battleUi=true,elevation=0,effectiveMaxHp=null,fieldArt=null){
  c.save();c.translate(x,y);const dead=u.hp<=0,spent=u.ap===0&&u.mp===0;
  if(dead)c.globalAlpha=.3;else if(spent&&u.team==='ally')c.globalAlpha=.65;
  if(u.footprint&&!u.heavy)c.scale(1.55,1.35);if(u.pose==='prone'){c.rotate(-Math.PI/2);c.scale(.8,.8);}
  ellipse(c,0,0,16,7,'#06181cb0');if(battleUi){ellipse(c,0,-1,14,6,u.team==='ally'?'#7bc6d043':'#d67d7043');
  c.strokeStyle=selected?'#e5ce93':u.team==='ally'?'#9dd7d9':'#d68d84';c.lineWidth=selected?2:1;c.beginPath();c.ellipse(0,-1,15+(selected?Math.sin(time/250):0),6,0,0,Math.PI*2);c.stroke();c.lineWidth=1;}
  if(elevation)c.translate(0,-elevation); // Event bob/jump moves the body; its shadow stays on the ground.
- if(u.heavy&&drawScenery(c,'adarius-awake',0,0)||drawCharacterSprite(c,u.id,direction,u.form)||u.id==='hoshiyomi'){
+ if(u.heavy&&(fieldArt?(fieldArt.drawSprite(c,'adarius',direction,0,0),true):drawScenery(c,'adarius-awake',0,0))||drawCharacterSprite(c,u.id,direction,u.form)||u.id==='hoshiyomi'){
   // Rings and status UI are independent of the supplied character art.
  }else if(u.team==='enemy'){
   if(u.enemyType==='beast'){
@@ -87,6 +88,7 @@ export class MapView{
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(canvas);
   canvas.addEventListener('mousemove',e=>{const p=this.pick(e);this.hover=p;onHover(p);});canvas.addEventListener('mouseleave',()=>{this.hover=null;onHover(null);});canvas.addEventListener('click',e=>onClick(this.pick(e)));
   canvas.addEventListener('wheel',e=>{e.preventDefault();this.setZoom(e.deltaY<0?.12:-.12);},{passive:false});canvas.addEventListener('contextmenu',e=>e.preventDefault());
+  this.art=null;loadMapArt().then(art=>{if(this.alive&&art)this.art=new MapArtPainter(art);});
   this.resize();this.frame();
  }
  resize(){const r=this.canvas.getBoundingClientRect();this.w=r.width;this.h=r.height;this.dpr=Math.min(window.devicePixelRatio||1,2);this.canvas.width=Math.round(this.w*this.dpr);this.canvas.height=Math.round(this.h*this.dpr);}
@@ -181,9 +183,9 @@ export class MapView{
   for(const k of cells){const [x,y]=k.split(',').map(Number),p=this.surface(x,y);shapes.push({depth:this.iso(x,y).y,points:this.groundPolygon(x,y).map(([dx,dy])=>[p.x+dx,p.y+dy])});}
   return shapes;
  }
- blockHeight(t){return t==='door'?48:t==='shrub'?38:t==='rubble'?14:ELEVATION_STEP_HEIGHT;}
+ blockHeight(t){return t==='door'?(this.art?56:48):t==='shrub'?48:t==='rubble'?(this.art&&this.battle.tutorial2?27:14):ELEVATION_STEP_HEIGHT;}
  blockOpacity(x,y,shapes){
-  const p=this.surface(x,y),height=this.blockHeight(this.battle.tile(x,y)),base=this.groundPolygon(x,y,.44).map(([dx,dy])=>[p.x+dx,p.y+dy]);
+  const p=this.surface(x,y),height=this.blockHeight(this.battle.tile(x,y)),base=this.groundPolygon(x,y,this.art ? .5 : .44).map(([dx,dy])=>[p.x+dx,p.y+dy]);
   const hull=convexHull([...base,...base.map(([x,y])=>[x,y-height])]);
   return shapes.some(s=>this.iso(x,y).y>s.depth+.01&&polygonsOverlap(hull,s.points))?.28:1;
  }
@@ -245,7 +247,8 @@ export class MapView{
   c.save();c.translate(this.ox,this.oy);c.scale(this.scale,this.scale);
   ellipse(c,0,180,340,165,'#071b2444');
   const tiles=this.terrainTiles(),bottom=this.elevationBounds().min,protectedShapes=this.protectedShapes(st,time),objects=[...tiles];
-  for(const [object,gate] of [[b.map.gate,true],[b.map.statue,false]]){if(!object||!gate&&!object.dormant)continue;
+  if(this.art)objects.push(...this.art.scenery(this,time));
+  for(const [object,gate] of (this.art?[]:[[b.map.gate,true],[b.map.statue,false]])){if(!object||!gate&&!object.dormant)continue;
    const cells=object.cells,visible=cells.some(([x,y])=>b.visible.has(key(x,y)));
    if(!visible&&!cells.some(([x,y])=>b.seen.has(key(x,y))))continue;
    const x=cells.reduce((a,p)=>a+p[0],0)/cells.length,y=cells.reduce((a,p)=>a+p[1],0)/cells.length+(object.lungeStart==null?0:Math.min(3.5,Math.max(0,(time-object.lungeStart)/240))),p=this.surface(x,y);
@@ -256,23 +259,31 @@ export class MapView{
   objects.sort((a,b)=>a.depth-b.depth||Number(!!a.u)-Number(!!b.u));
   const reachable=st.reachable??new Map(),area=st.area??[],areaSet=new Set(area.map(p=>key(p.x,p.y))),targetRangeSet=new Set((st.targetRange??[]).map(p=>key(p.x,p.y)));
   for(const object of objects){
+   if(object.fieldDraw){
+    const {p}=object,width=55,hull=[[p.x-width,p.y-object.height],[p.x+width,p.y-object.height],[p.x+width,p.y+16],[p.x-width,p.y+16]];
+    const blocked=protectedShapes.some(s=>object.depth>s.depth+.01&&polygonsOverlap(hull,s.points));
+    c.save();c.translate(p.x,p.y);c.globalAlpha=(object.visible?1:.3)*(blocked?.28:1);object.fieldDraw(c);c.restore();continue;
+   }
    if(object.art){c.save();c.globalAlpha=object.visible?(object.gate ? .85 : 1):.4;drawScenery(c,object.art,object.p.x+object.wiggle,object.p.y,object.gate);c.restore();continue;}
-   if(object.u){const {u,pose,p}=object,direction=st.interactive===false&&Number.isInteger(u.eventDirection)?u.eventDirection:directionFrame(pose.facing,this.yaw,b.map.invertY);sprite(c,u,p.x,p.y,u.id===st.selected?.id,time,direction,!b.scripted,0,b.effective(u,'maxHp'));continue;}
+   if(object.u){const {u,pose,p}=object,direction=st.interactive===false&&Number.isInteger(u.eventDirection)?u.eventDirection:directionFrame(pose.facing,this.yaw,b.map.invertY);const statue=b.map.statue,baseLift=this.art&&u.heavy&&statue?32*Math.max(0,1-Math.max(Math.abs(pose.x-statue.x),Math.abs(pose.y-statue.y))):0;sprite(c,u,p.x,p.y,u.id===st.selected?.id,time,direction,!b.scripted,baseLift,b.effective(u,'maxHp'),this.art?.art);continue;}
    const {x,y}=object;
    const k=key(x,y),visible=b.visible.has(k),seen=b.seen.has(k),t=b.tile(x,y),d=TERRAIN[t],px=this.surface(x,y).x,py=this.surface(x,y).y;
    c.save();c.translate(px,py);const diamond=this.groundPolygon(x,y),faces=this.cliffFaces(x,y,bottom);
-   c.globalAlpha=this.terrainOpacity(x,y,faces,protectedShapes);this.drawCliffs(c,faces,visible,seen);
+   c.globalAlpha=this.terrainOpacity(x,y,faces,protectedShapes);if(this.art&&visible)this.art.cliffs(c,this,x,y,faces);else this.drawCliffs(c,faces,visible,seen);
 
    poly(c,diamond,visible?d.color:seen?'#20333b':'#142a33',visible?'#c4c9b218':'#59747616');
    if(visible){
+    if(this.art)this.art.ground(c,this,x,y,t,time);
+    if(!this.art){
     const variation=((x*19+y*31)%11)/110;c.fillStyle=`rgba(0,0,0,${variation})`;c.beginPath();diamond.forEach(([xx,yy],i)=>i?c.lineTo(xx,yy):c.moveTo(xx,yy));c.closePath();c.fill();
     if(t==='road'||t==='plain'||t==='sound'){line(c,[[-14,-6],[-2,0],[-10,6]],'#b9c0ae30');line(c,[[10,-8],[5,-2],[19,4]],'#35484350');if(t==='sound'){line(c,[[-15,2],[0,-6],[14,1],[0,9]],'#c8c3a4',1);}}
     if(['grass','shrub','mud'].includes(t)){for(let j=0;j<4;j++){const xx=(x*17+y*13+j*11)%35-17,yy=(x+y+j*4)%12-6;line(c,[[xx-2,yy],[xx,yy-4],[xx+1,yy]],t==='mud'?'#8c807330':'#a1b49145');}}
     if(t==='water'||t==='poison'||t==='ice'||t==='lava'){for(let j=0;j<3;j++){const xx=-14+j*10,yy=2-j*2;line(c,[[xx-4,yy],[xx+4,yy+2]],t==='water'?'#8cb9be60':t==='ice'?'#cfede2a0':t==='lava'?'#efb678a0':'#9a81a980',1);}if(t==='water')line(c,[[0,-2],[3,1],[7,-1]],'#aacfd360');}
     if(t==='thorn'){for(let j=0;j<4;j++)poly(c,[[j*7-12,4],[j*7-10,-5],[j*7-7,5]],'#b6b8ac');}
     if(t==='charge'){line(c,[[-15,0],[-3,-2],[-7,4],[9,0],[14,1]],'#ddc8e3',2);}
-    if(b.sceneBlood?.x===x&&b.sceneBlood?.y===y)ellipse(c,0,0,18,8,'#641c31');
     if(t==='pit')poly(c,[[0,-11],[23,0],[0,11],[-23,0]],'#0b1d28');
+    }
+    if(b.sceneBlood?.x===x&&b.sceneBlood?.y===y)ellipse(c,0,0,18,8,'#641c31');
     if(b.map.exit.some(([ex,ey])=>ex===x&&ey===y)){poly(c,[[0,-10],[20,0],[0,10],[-20,0]],'#d4c58d33','#d4c58d');c.fillStyle='#e8d9a6';c.font='13px serif';c.textAlign='center';c.fillText('◇',0,4);}
    }
    c.globalAlpha=1;
@@ -286,10 +297,11 @@ export class MapView{
    if(!visible)continue;
    c.save();c.translate(px,py);
    c.save();if(['wall','crack','door','shrub','rubble'].includes(t))c.globalAlpha=this.blockOpacity(x,y,protectedShapes);
-   if(['wall','crack','door'].includes(t))this.drawBlock(c,x,y,t);
-   if(t==='stairsDown'||t==='stairsUp'){for(let i=0;i<5;i++){const yy=-8+i*4,down=t==='stairsDown';poly(c,[[-18,yy],[1,yy-8],[20,yy],[1,yy+8]],down?`hsl(205,12%,${40-i*5}%)`:`hsl(205,12%,${20+i*6}%)`,'#b4b6a166');}c.fillStyle='#e3d3a9';c.font='12px serif';c.textAlign='center';c.fillText(t==='stairsDown'?'↓':'↑',0,-18);}
-   if(t==='shrub')for(let j=0;j<3;j++){const xx=(j-1)*10,yy=j===1?-6:2;line(c,[[xx,yy],[xx,yy-19]],'#706e55',3);poly(c,[[xx-13,yy-8],[xx-6,yy-19],[xx-9,yy-19],[xx,yy-36],[xx+9,yy-18],[xx+6,yy-18],[xx+13,yy-8]],j%2?'#3b5d52':'#48695a','#a3b59c20');}
-   if(t==='rubble'){poly(c,[[-18,2],[-18,-6],[-8,-11],[0,-6],[0,3],[-8,8]],'#87948a','#b2bb9c44');poly(c,[[3,3],[2,-5],[11,-10],[19,-4],[19,3],[11,7]],'#6f7c75');}
+   const texturedObject=this.art?.block(c,this,x,y,t);
+   if(!texturedObject&&['wall','crack','door'].includes(t))this.drawBlock(c,x,y,t);
+   if(!this.art&&(t==='stairsDown'||t==='stairsUp')){for(let i=0;i<5;i++){const yy=-8+i*4,down=t==='stairsDown';poly(c,[[-18,yy],[1,yy-8],[20,yy],[1,yy+8]],down?`hsl(205,12%,${40-i*5}%)`:`hsl(205,12%,${20+i*6}%)`,'#b4b6a166');}c.fillStyle='#e3d3a9';c.font='12px serif';c.textAlign='center';c.fillText(t==='stairsDown'?'↓':'↑',0,-18);}
+   if(!texturedObject&&t==='shrub')for(let j=0;j<3;j++){const xx=(j-1)*10,yy=j===1?-6:2;line(c,[[xx,yy],[xx,yy-19]],'#706e55',3);poly(c,[[xx-13,yy-8],[xx-6,yy-19],[xx-9,yy-19],[xx,yy-36],[xx+9,yy-18],[xx+6,yy-18],[xx+13,yy-8]],j%2?'#3b5d52':'#48695a','#a3b59c20');}
+   if(!texturedObject&&t==='rubble'){poly(c,[[-18,2],[-18,-6],[-8,-11],[0,-6],[0,3],[-8,8]],'#87948a','#b2bb9c44');poly(c,[[3,3],[2,-5],[11,-10],[19,-4],[19,3],[11,7]],'#6f7c75');}
    c.restore();
    const item=b.map.items.find(i=>!i.taken&&i.x===x&&i.y===y);if(item){ellipse(c,0,-3,11,5,'#e8d39335');poly(c,[[-7,-3],[-7,-12],[0,-16],[7,-12],[7,-3],[0,1]],'#a6905c','#edd39c');line(c,[[-7,-9],[0,-5],[7,-9]],'#efcf8c');}
    c.restore();
@@ -300,7 +312,12 @@ export class MapView{
   for(const p of b.sonar()){const q=this.surface(p.x,p.y),px=q.x,py=q.y;c.strokeStyle='#d5bd8644';c.beginPath();c.ellipse(px,py,18,9,0,0,Math.PI*2);c.stroke();c.font='bold 17px Georgia';c.fillStyle='#dcc799';c.textAlign='center';c.fillText('?',px,py-10);}
   if(st.path)for(const p of st.path){const q=this.surface(p.x,p.y);ellipse(c,q.x,q.y,2.5,1.6,'#eedeb5');}
   this.effects=this.effects.filter(e=>time-e.time<(['damage','heal'].includes(e.type)?HP_FEEDBACK.duration:1100));
-  for(const e of this.effects){if(['damage','heal'].includes(e.type))continue;const age=time-e.time,p=this.surface(e.x,e.y);c.globalAlpha=1-age/1100;if(e.type==='skill'){c.strokeStyle='#d7c68c';c.lineWidth=2;c.beginPath();c.ellipse(p.x,p.y,15+age/35,7+age/70,0,0,Math.PI*2);c.stroke();c.lineWidth=1;}else{c.font='bold 18px Georgia';c.textAlign='center';c.fillStyle='#ede4c8';c.strokeStyle='#12252a';c.lineWidth=3;c.strokeText('MISS',p.x,p.y-55-age/30);c.fillText('MISS',p.x,p.y-55-age/30);c.lineWidth=1;}c.globalAlpha=1;}
+  for(const e of this.effects){if(['damage','heal'].includes(e.type))continue;const age=time-e.time,p=this.surface(e.x,e.y);c.globalAlpha=1-age/1100;if(e.type==='skill'){
+    if(SKILLS[e.skill]?.visualShots===2&&e.target){
+     const target=this.surface(e.target.x,e.target.y);
+     for(const onset of [40,240]){const shotAge=age-onset;if(shotAge>=0&&shotAge<180){const alpha=1-shotAge/180;c.save();c.globalAlpha=alpha;c.strokeStyle='#ffe6a2';c.lineWidth=2;c.beginPath();c.moveTo(p.x,p.y-43);c.lineTo(target.x,target.y-38);c.stroke();ellipse(c,p.x,p.y-43,7*alpha+2,4*alpha+1,'#fff0a9');c.restore();}}
+    }
+    c.strokeStyle='#d7c68c';c.lineWidth=2;c.beginPath();c.ellipse(p.x,p.y,15+age/35,7+age/70,0,0,Math.PI*2);c.stroke();c.lineWidth=1;}else{c.font='bold 18px Georgia';c.textAlign='center';c.fillStyle='#ede4c8';c.strokeStyle='#12252a';c.lineWidth=3;c.strokeText('MISS',p.x,p.y-55-age/30);c.fillText('MISS',p.x,p.y-55-age/30);c.lineWidth=1;}c.globalAlpha=1;}
   c.restore();
   this.drawHpFeedback(time,objects);
   // Screen-sized labels stay readable at every zoom and render above obstacles.

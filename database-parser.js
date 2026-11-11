@@ -71,7 +71,7 @@ export function parseDatabase(files){
     if(r.effect==='cure'&&!r.cure_status_ids.length)throw Error(`${r.id}: 解除状態がありません`);
     if(r.effect==='revive'&&(r.revive_hp<1||r.target!=='dead_ally'))throw Error(`${r.id}: 蘇生量・対象が不正です`);
     if(['status','feral'].includes(r.effect)&&(!r.status_id||r.duration<1))throw Error(`${r.id}: 付与状態・持続がありません`);
-    if(r.effect==='feral'&&(r.target!=='self'||r.status_id!=='feral'))throw Error(`${r.id}: 凶獣薬型は自身へのferal付与です`);
+    if(r.effect==='feral'&&(r.target!=='self'||r.status_id!=='feral'))throw Error(`${r.id}: 狂獣薬型は自身へのferal付与です`);
    }
   }
  }

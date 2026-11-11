@@ -50,6 +50,10 @@ export const SKILLS = {
   gregorSlash:{name:'斬撃',kind:'attack',shape:'front3',directional:true,power:1,desc:'前方横3マスに斬撃。'},
   gregorSmash:{name:'強打',kind:'attack',shape:'front6',directional:true,power:1.25,desc:'前方2段・横3マスに強打。'},
   gregorPoison:{name:'毒刃',kind:'attack',shape:'front3',directional:true,power:1,poison:25,cd:3,desc:'前方横3マスへ物理攻撃。命中時25%で毒。CT 3。'},
+  twinShot:{attackStyle:'ranged',name:'ツインショット',kind:'attack',range:3,magic:false,power:1,visualShots:2,desc:'上下左右の直線・射程3の視認中の敵1体へ物理攻撃。二連射の演出で命中・会心・ダメージは各1回。アクション1、追加コスト0。'},
+  dualInfinity:{attackStyle:'ranged',name:'デュアルインフィニティ',kind:'attack',shape:'fan',directional:true,depth:3,range:3,magic:false,power:1.15,lineOfSight:true,visualShots:2,cd:3,requires:'BLITZ & BLAZE',desc:'上下左右から向きを選び、前方3段・幅1/3/5（最大9マス）の視認中の敵すべてへ物理攻撃×115%。壁越し・味方巻き込みなし。BLITZ & BLAZEが必要。CT 3。'},
+  lightningRush:{name:'疾風迅雷',kind:'buff',shape:'self',uses:3,stat:'move',amount:4,duration:2,noRefresh:true,desc:'自身の移動力 +4。発動ターンを含む2自軍ターン。上限の増加分を残移動力にも加算。アクション1、1シナリオ3回、効果中の再使用不可。'},
+  lightningReflex:{name:'電光石火',passive:true,accuracySpeedMultiplier:1.2,appliesTo:['twinShot','dualInfinity'],desc:'ツインショットとデュアルインフィニティの命中計算に限り、自身の有効迅速を1.20倍として扱う。被攻撃時の回避・移動力・ダメージには適用しない。'},
   attack:{name:'通常攻撃',kind:'attack',power:1,desc:'直線上の敵1体を攻撃。壁に遮られる。'},
   fangThrust:{name:'牙突き(仮)',kind:'attack',shape:'rays',range:2,lineOfSight:true,damageMultiplier:1.5,accuracySpeedMultiplier:1.15,cd:3,desc:'上下左右4方向・各直線2マスの敵すべてへ通常攻撃の1.5倍ダメージ。この攻撃の命中判定のみ迅速 +15%。CT 3。'},
   metamorphosis:{name:'形象変化(メタモルフォーゼ)(仮)',kind:'transform',shape:'self',freeAction:true,oncePerTurn:true,desc:'ヒトと狼の姿を切り替える。1ターンに1回、行動回数を消費しない。消費済みの移動力は引き継ぐ。'},
@@ -74,6 +78,6 @@ export const MISSIONS = [
  {id:1,name:'水鏡の向こう',subtitle:'BEYOND THE WATER MIRROR',place:'旧水路 → 閉ざされた礼拝堂',objective:'全員で東の出口へ → 帳守を撃破',short:'踏破・討伐',turns:32,par:18,reward:340,xp:100,stages:2,sub:'全区画の還りの灯を回収する',desc:'水路の先で、礼拝堂の灯が消えた。濁流を渡り、還り人たちの帰路を取り戻せ。',story:[['umine','水路は礼拝堂に繋がっています。足元は、私に任せて。'],['roland','壁の向こうに気配があります。剣の届く場所なら、切り拓けます。'],['astarthe','見えないものを、見えないまま信じる。それも月の導きなのでしょうね。']]},
  {id:2,name:'明けぬ夜の灯',subtitle:'A LIGHT BEFORE DAWN',place:'ルーメン旧礼拝堂・防衛線',objective:'アスターテを守り8ターン生存',short:'防衛',turns:8,par:8,reward:420,xp:125,stages:1,sub:'敵を6体以上撃破する',desc:'帳が満ちる夜。鐘の音が戻るまで、四人でこの場所を守り抜く。',story:[['astarthe','人を、人のまま留め続けるために。今宵も、鈴を鳴らします。'],['orion','何体来ようが同じことだ。全員、とっ捕まえてやる。'],['roland','この光は絶やさせません。'],['umine','夜が明けなくても、私たちはここにいます。']]}
 ];
-export const STATUS_NAMES={shadowPin:'影縫い',feral:'凶獣薬',poison:'毒',burn:'炎上',paralysis:'麻痺',blind:'暗闇',freeze:'凍結',doom:'呪死',exposed:'露見',lavaSlow:'移動低下',immune:'麻痺耐性'};
+export const STATUS_NAMES={shadowPin:'影縫い',feral:'狂獣薬',poison:'毒',burn:'炎上',paralysis:'麻痺',blind:'暗闇',freeze:'凍結',doom:'呪死',exposed:'露見',lavaSlow:'移動低下',immune:'麻痺耐性'};
 
 validateReferences(DATABASE,SKILLS,STATUS_NAMES);

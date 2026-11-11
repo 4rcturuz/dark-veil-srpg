@@ -1,0 +1,2529 @@
+{
+  "schema": "darkveil-field-art/1.0",
+  "version": "1.0",
+  "baselineVerified": "alpha0.32",
+  "encoding": "lossless WebP",
+  "imageCount": 29,
+  "pathBase": "repository root",
+  "textures": {
+    "G01": {
+      "src": "assets/field/ground/G01_stone_worn.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G02": {
+      "src": "assets/field/ground/G02_stone_ordered.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G03": {
+      "src": "assets/field/ground/G03_soil_gravel.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G04": {
+      "src": "assets/field/ground/G04_road_earth.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G05": {
+      "src": "assets/field/ground/G05_ash_ground.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G06": {
+      "src": "assets/field/ground/G06_grass_short.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G07": {
+      "src": "assets/field/ground/G07_bridge_planks.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G08": {
+      "src": "assets/field/ground/G08_mud.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G09": {
+      "src": "assets/field/ground/G09_water.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G10": {
+      "src": "assets/field/ground/G10_poison_water.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G11": {
+      "src": "assets/field/ground/G11_ice.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "G12": {
+      "src": "assets/field/ground/G12_lava.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "worldUVOrigin": [
+        -0.5,
+        -0.5
+      ],
+      "wrap": "repeat"
+    },
+    "F01": {
+      "src": "assets/field/faces/F01_stone_blocks.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "worldUVOrigin": "shared structure origin; elevation zero",
+      "wrap": "repeat"
+    },
+    "F02": {
+      "src": "assets/field/faces/F02_earth_cut.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "worldUVOrigin": "shared structure origin; elevation zero",
+      "wrap": "repeat"
+    },
+    "F03": {
+      "src": "assets/field/faces/F03_stone_cut.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "worldUVOrigin": "shared structure origin; elevation zero",
+      "wrap": "repeat"
+    },
+    "F04": {
+      "src": "assets/field/faces/F04_wood.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "worldUVOrigin": "shared structure origin; elevation zero",
+      "wrap": "repeat"
+    },
+    "F05": {
+      "src": "assets/field/faces/F05_iron.webp",
+      "size": [
+        256,
+        256
+      ],
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "worldUVOrigin": "shared structure origin; elevation zero",
+      "wrap": "repeat"
+    }
+  },
+  "regions": {
+    "D01": {
+      "src": "assets/field/decals/ground.webp",
+      "rect": [
+        2,
+        2,
+        128,
+        128
+      ],
+      "contentRect": [
+        2,
+        16,
+        128,
+        99
+      ],
+      "sourceCrop": [
+        214,
+        302,
+        1061,
+        956
+      ],
+      "sourceName": "灰ベージュの石片と砂粒.png",
+      "layer": "ground_decal",
+      "padding": 2
+    },
+    "D02": {
+      "src": "assets/field/decals/ground.webp",
+      "rect": [
+        134,
+        2,
+        128,
+        128
+      ],
+      "contentRect": [
+        134,
+        13,
+        128,
+        105
+      ],
+      "sourceCrop": [
+        131,
+        209,
+        1111,
+        1015
+      ],
+      "sourceName": "薄く吹き寄せた灰と煤.png",
+      "layer": "ground_decal",
+      "padding": 2
+    },
+    "D03": {
+      "src": "assets/field/decals/ground.webp",
+      "rect": [
+        266,
+        2,
+        128,
+        128
+      ],
+      "contentRect": [
+        266,
+        13,
+        128,
+        106
+      ],
+      "sourceCrop": [
+        145,
+        206,
+        1109,
+        1004
+      ],
+      "sourceName": "青緑の苔と短草の束.png",
+      "layer": "ground_decal",
+      "padding": 2
+    },
+    "D05": {
+      "src": "assets/field/decals/ground.webp",
+      "rect": [
+        2,
+        134,
+        128,
+        128
+      ],
+      "contentRect": [
+        2,
+        152,
+        128,
+        91
+      ],
+      "sourceCrop": [
+        218,
+        303,
+        1053,
+        896
+      ],
+      "sourceName": "植物を除いた灰色の石板.png",
+      "layer": "ground_decal",
+      "padding": 2
+    },
+    "D07": {
+      "src": "assets/field/decals/ground.webp",
+      "rect": [
+        134,
+        134,
+        128,
+        128
+      ],
+      "contentRect": [
+        134,
+        141,
+        128,
+        114
+      ],
+      "sourceCrop": [
+        192,
+        239,
+        1061,
+        1011
+      ],
+      "sourceName": "暗灰緑の湿染みテクスチャ.png",
+      "layer": "ground_decal",
+      "padding": 2
+    },
+    "D04": {
+      "src": "assets/field/decals/wall.webp",
+      "rect": [
+        2,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        13,
+        2,
+        234,
+        256
+      ],
+      "sourceCrop": [
+        187,
+        164,
+        1039,
+        1098
+      ],
+      "sourceName": "古石に走る深い分岐亀裂.png",
+      "layer": "surface_decal",
+      "padding": 2
+    },
+    "D08_branch": {
+      "src": "assets/field/decals/wall.webp",
+      "rect": [
+        262,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        317,
+        2,
+        145,
+        256
+      ],
+      "sourceCrop": [
+        336,
+        86,
+        965,
+        1194
+      ],
+      "sourceName": "分岐した蔦の精密切り抜き.png",
+      "layer": "surface_decal",
+      "padding": 2
+    },
+    "D08_hang": {
+      "src": "assets/field/decals/wall.webp",
+      "rect": [
+        522,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        615,
+        2,
+        70,
+        256
+      ],
+      "sourceCrop": [
+        491,
+        95,
+        763,
+        1095
+      ],
+      "sourceName": "青緑の短い垂れ蔦.png",
+      "layer": "surface_decal",
+      "padding": 2
+    },
+    "D06": {
+      "src": "assets/field/fx/charge.webp",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "contentRect": [
+        4,
+        30,
+        120,
+        68
+      ],
+      "sourceCrop": [
+        310,
+        471,
+        898,
+        804
+      ],
+      "anchor": [
+        64,
+        64
+      ],
+      "layer": "ground_fx"
+    },
+    "P01a_top": {
+      "src": "assets/field/parts/low.webp",
+      "rect": [
+        2,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        2,
+        28,
+        256,
+        204
+      ],
+      "sourceCrop": [
+        261,
+        335,
+        973,
+        902
+      ],
+      "sourceName": "散在する小石の上面.png",
+      "layer": "low_geometry_faces",
+      "padding": 2
+    },
+    "P01b_top": {
+      "src": "assets/field/parts/low.webp",
+      "rect": [
+        262,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        287,
+        2,
+        205,
+        256
+      ],
+      "sourceCrop": [
+        23,
+        180,
+        708,
+        1036
+      ],
+      "sourceName": "左側に寄せた崩落石の上面.png",
+      "layer": "low_geometry_faces",
+      "padding": 2
+    },
+    "P01c_top": {
+      "src": "assets/field/parts/low.webp",
+      "rect": [
+        2,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        2,
+        357,
+        256,
+        66
+      ],
+      "sourceCrop": [
+        106,
+        518,
+        1144,
+        785
+      ],
+      "sourceName": "低い崩落石の上面.png",
+      "layer": "low_geometry_faces",
+      "padding": 2
+    },
+    "P06_triangle": {
+      "src": "assets/field/parts/low.webp",
+      "rect": [
+        262,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        302,
+        262,
+        176,
+        256
+      ],
+      "sourceCrop": [
+        282,
+        134,
+        966,
+        1131
+      ],
+      "sourceName": "古鉄の短い三角棘.png",
+      "layer": "low_geometry_faces",
+      "padding": 2
+    },
+    "P02_front": {
+      "src": "assets/field/parts/gravestone.webp",
+      "rect": [
+        2,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        66,
+        2,
+        127,
+        256
+      ],
+      "sourceCrop": [
+        342,
+        70,
+        901,
+        1193
+      ],
+      "sourceName": "風化した丸頭の灰色墓石.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P02_back": {
+      "src": "assets/field/parts/gravestone.webp",
+      "rect": [
+        262,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        326,
+        2,
+        128,
+        256
+      ],
+      "sourceCrop": [
+        340,
+        67,
+        905,
+        1195
+      ],
+      "sourceName": "古びた丸頭墓石の背面.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P02_side": {
+      "src": "assets/field/parts/gravestone.webp",
+      "rect": [
+        522,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        635,
+        2,
+        29,
+        256
+      ],
+      "sourceCrop": [
+        563,
+        63,
+        690,
+        1190
+      ],
+      "sourceName": "丸頭墓石の厚み側面.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P02_top": {
+      "src": "assets/field/parts/gravestone.webp",
+      "rect": [
+        2,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        2,
+        375,
+        256,
+        30
+      ],
+      "sourceCrop": [
+        49,
+        573,
+        1205,
+        710
+      ],
+      "sourceName": "古石碑の細長い上面.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P02_broken": {
+      "src": "assets/field/parts/gravestone.webp",
+      "rect": [
+        262,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        262,
+        276,
+        256,
+        227
+      ],
+      "sourceCrop": [
+        230,
+        395,
+        1020,
+        1095
+      ],
+      "sourceName": "低い破断墓石の正面片.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P03_straight": {
+      "src": "assets/field/parts/fence.webp",
+      "rect": [
+        2,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        2,
+        85,
+        256,
+        90
+      ],
+      "sourceCrop": [
+        64,
+        155,
+        1710,
+        733
+      ],
+      "sourceName": "古びた黒鉄柵の一節.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P03_post": {
+      "src": "assets/field/parts/fence.webp",
+      "rect": [
+        262,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        379,
+        2,
+        21,
+        256
+      ],
+      "sourceCrop": [
+        579,
+        61,
+        674,
+        1202
+      ],
+      "sourceName": "黒鉄の槍先付き支柱.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P03_broken": {
+      "src": "assets/field/parts/fence.webp",
+      "rect": [
+        522,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        522,
+        64,
+        256,
+        132
+      ],
+      "sourceCrop": [
+        50,
+        351,
+        1203,
+        944
+      ],
+      "sourceName": "折れた古鉄の柵.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P03_fallen": {
+      "src": "assets/field/parts/fence.webp",
+      "rect": [
+        782,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        782,
+        73,
+        256,
+        114
+      ],
+      "sourceCrop": [
+        35,
+        401,
+        1222,
+        929
+      ],
+      "sourceName": "折れた黒鉄柵の一節.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P04_left_front": {
+      "src": "assets/field/parts/chapel_door.webp",
+      "rect": [
+        2,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        82,
+        2,
+        96,
+        256
+      ],
+      "sourceCrop": [
+        419,
+        70,
+        836,
+        1186
+      ],
+      "sourceName": "古びた聖堂の木製扉.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P04_right_front": {
+      "src": "assets/field/parts/chapel_door.webp",
+      "rect": [
+        262,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        336,
+        2,
+        108,
+        256
+      ],
+      "sourceCrop": [
+        376,
+        29,
+        878,
+        1224
+      ],
+      "sourceName": "古びた聖堂の右扉.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P04_left_back": {
+      "src": "assets/field/parts/chapel_door.webp",
+      "rect": [
+        522,
+        2,
+        256,
+        256
+      ],
+      "contentRect": [
+        601,
+        2,
+        97,
+        256
+      ],
+      "sourceCrop": [
+        415,
+        66,
+        840,
+        1187
+      ],
+      "sourceName": "左扉の木製裏面.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P04_right_back": {
+      "src": "assets/field/parts/chapel_door.webp",
+      "rect": [
+        2,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        73,
+        262,
+        114,
+        256
+      ],
+      "sourceCrop": [
+        355,
+        28,
+        887,
+        1226
+      ],
+      "sourceName": "古木の右扉・裏面.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P04_frame": {
+      "src": "assets/field/parts/chapel_door.webp",
+      "rect": [
+        262,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        303,
+        262,
+        174,
+        256
+      ],
+      "sourceCrop": [
+        220,
+        10,
+        1034,
+        1210
+      ],
+      "sourceName": "尖頭アーチの石枠と左右の石柱.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P04_tracery": {
+      "src": "assets/field/parts/chapel_door.webp",
+      "rect": [
+        522,
+        262,
+        256,
+        256
+      ],
+      "contentRect": [
+        522,
+        319,
+        256,
+        141
+      ],
+      "sourceCrop": [
+        173,
+        53,
+        1601,
+        842
+      ],
+      "sourceName": "尖頭アーチ内の花弁状石透かし.png",
+      "layer": "face",
+      "padding": 2
+    },
+    "P05_wall_weathered": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        4,
+        4,
+        512,
+        320
+      ],
+      "contentRect": [
+        4,
+        13,
+        512,
+        301
+      ],
+      "sourceCrop": [
+        10,
+        257,
+        1244,
+        982
+      ],
+      "sourceName": "損傷した切妻の石積み正面壁.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_wall_collapsed": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        524,
+        4,
+        512,
+        320
+      ],
+      "contentRect": [
+        524,
+        12,
+        512,
+        303
+      ],
+      "sourceCrop": [
+        12,
+        255,
+        1242,
+        984
+      ],
+      "sourceName": "崩落した石積みの正面壁.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_timber_weathered": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        4,
+        332,
+        256,
+        320
+      ],
+      "contentRect": [
+        4,
+        369,
+        256,
+        245
+      ],
+      "sourceCrop": [
+        77,
+        49,
+        1204,
+        1126
+      ],
+      "sourceName": "露出した損傷門の木組み.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_timber_collapsed": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        268,
+        332,
+        256,
+        320
+      ],
+      "contentRect": [
+        268,
+        409,
+        256,
+        166
+      ],
+      "sourceCrop": [
+        99,
+        135,
+        1157,
+        822
+      ],
+      "sourceName": "崩落跡の残存木組み.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_frame": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        532,
+        332,
+        192,
+        256
+      ],
+      "contentRect": [
+        532,
+        333,
+        192,
+        254
+      ],
+      "sourceCrop": [
+        282,
+        175,
+        973,
+        1090
+      ],
+      "sourceName": "門のコ字型石枠.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_rose": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        732,
+        332,
+        192,
+        192
+      ],
+      "contentRect": [
+        733,
+        332,
+        190,
+        192
+      ],
+      "sourceCrop": [
+        97,
+        100,
+        1149,
+        1161
+      ],
+      "sourceName": "放射状の石造円窓.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_fracture": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        4,
+        660,
+        512,
+        64
+      ],
+      "contentRect": [
+        34,
+        660,
+        451,
+        64
+      ],
+      "sourceCrop": [
+        49,
+        363,
+        1725,
+        601
+      ],
+      "sourceName": "欠けた石壁の破断面素材.png",
+      "layer": "structure_faces",
+      "padding": 4
+    },
+    "P05_fallen": {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "rect": [
+        524,
+        660,
+        256,
+        96
+      ],
+      "contentRect": [
+        524,
+        671,
+        256,
+        74
+      ],
+      "sourceCrop": [
+        175,
+        482,
+        1083,
+        746
+      ],
+      "sourceName": "石と古木の低い崩落片.png",
+      "layer": "structure_faces",
+      "padding": 4
+    }
+  },
+  "sprites": {
+    "shrub_low": {
+      "src": "assets/field/objects/shrub_low.webp",
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frames": 8,
+      "columns": 1,
+      "anchor": [
+        64,
+        96
+      ],
+      "drawWidth": 80,
+      "frameData": [
+        {
+          "direction": 0,
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "contentRect": [
+            11,
+            48,
+            107,
+            49
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "青緑の低い灌木.png",
+          "sourceCrop": [
+            91,
+            580,
+            1165,
+            1072
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 1,
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "contentRect": [
+            14,
+            172,
+            102,
+            52
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "右斜め前の低い灌木.png",
+          "sourceCrop": [
+            108,
+            565,
+            1138,
+            1093
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 2,
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "contentRect": [
+            32,
+            304,
+            78,
+            49
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "低木の右側面ビュー.png",
+          "sourceCrop": [
+            241,
+            578,
+            1026,
+            1072
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 3,
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "contentRect": [
+            17,
+            430,
+            100,
+            51
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "右斜め後ろの低い灌木.png",
+          "sourceCrop": [
+            122,
+            562,
+            1129,
+            1078
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 4,
+          "rect": [
+            0,
+            512,
+            128,
+            128
+          ],
+          "contentRect": [
+            14,
+            559,
+            105,
+            49
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "低い灌木の背面ビュー.png",
+          "sourceCrop": [
+            98,
+            578,
+            1157,
+            1075
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 5,
+          "rect": [
+            0,
+            640,
+            128,
+            128
+          ],
+          "contentRect": [
+            21,
+            685,
+            94,
+            52
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "青緑の低灌木・左斜め後ろ姿.png",
+          "sourceCrop": [
+            153,
+            567,
+            1101,
+            1088
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 6,
+          "rect": [
+            0,
+            768,
+            128,
+            128
+          ],
+          "contentRect": [
+            25,
+            814,
+            78,
+            51
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "低い灌木の左側面.png",
+          "sourceCrop": [
+            234,
+            577,
+            1019,
+            1089
+          ],
+          "scale": 0.09927798
+        },
+        {
+          "direction": 7,
+          "rect": [
+            0,
+            896,
+            128,
+            128
+          ],
+          "contentRect": [
+            23,
+            941,
+            88,
+            51
+          ],
+          "anchor": [
+            64,
+            96
+          ],
+          "sourceName": "左斜め前の低木.png",
+          "sourceCrop": [
+            185,
+            572,
+            1068,
+            1090
+          ],
+          "scale": 0.09927798
+        }
+      ],
+      "directions": [
+        "front",
+        "front_right",
+        "right",
+        "back_right",
+        "back",
+        "back_left",
+        "left",
+        "front_left"
+      ]
+    },
+    "charred_tree": {
+      "src": "assets/field/objects/charred_tree.webp",
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frames": 8,
+      "columns": 1,
+      "anchor": [
+        64,
+        112
+      ],
+      "drawWidth": 112,
+      "frameData": [
+        {
+          "direction": 0,
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "contentRect": [
+            23,
+            17,
+            70,
+            97
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼け焦げた枯れ木.png",
+          "sourceCrop": [
+            193,
+            113,
+            927,
+            1137
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 1,
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "contentRect": [
+            32,
+            145,
+            55,
+            96
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼けた立木の右斜め前ビュー.png",
+          "sourceCrop": [
+            292,
+            119,
+            868,
+            1135
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 2,
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "contentRect": [
+            53,
+            273,
+            22,
+            96
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼け焦げた枯れ木の右側面.png",
+          "sourceCrop": [
+            512,
+            117,
+            742,
+            1133
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 3,
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "contentRect": [
+            47,
+            400,
+            50,
+            98
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼けた立木の右斜め後ろ姿.png",
+          "sourceCrop": [
+            428,
+            104,
+            956,
+            1138
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 4,
+          "rect": [
+            0,
+            512,
+            128,
+            128
+          ],
+          "contentRect": [
+            37,
+            528,
+            65,
+            97
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼けた立木の完全な背面.png",
+          "sourceCrop": [
+            329,
+            104,
+            1012,
+            1129
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 5,
+          "rect": [
+            0,
+            640,
+            128,
+            128
+          ],
+          "contentRect": [
+            39,
+            656,
+            58,
+            97
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼けた立木の左斜め後ろ姿.png",
+          "sourceCrop": [
+            339,
+            107,
+            947,
+            1135
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 6,
+          "rect": [
+            0,
+            768,
+            128,
+            128
+          ],
+          "contentRect": [
+            47,
+            783,
+            32,
+            98
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼けた立木の左側面.png",
+          "sourceCrop": [
+            436,
+            94,
+            772,
+            1133
+          ],
+          "scale": 0.09469697
+        },
+        {
+          "direction": 7,
+          "rect": [
+            0,
+            896,
+            128,
+            128
+          ],
+          "contentRect": [
+            36,
+            910,
+            50,
+            100
+          ],
+          "anchor": [
+            64,
+            112
+          ],
+          "sourceName": "焼けた立木の左斜め前面.png",
+          "sourceCrop": [
+            335,
+            83,
+            861,
+            1139
+          ],
+          "scale": 0.09469697
+        }
+      ],
+      "directions": [
+        "front",
+        "front_right",
+        "right",
+        "back_right",
+        "back",
+        "back_left",
+        "left",
+        "front_left"
+      ]
+    },
+    "adarius": {
+      "src": "assets/units/adarius/idle-sheet.webp",
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frames": 8,
+      "columns": 1,
+      "anchor": [
+        128,
+        224
+      ],
+      "drawWidth": 128,
+      "frameData": [
+        {
+          "direction": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "contentRect": [
+            86,
+            33,
+            85,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "台座上の休眠石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            377,
+            847
+          ],
+          "scale": 0.22668241
+        },
+        {
+          "direction": 1,
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "contentRect": [
+            86,
+            289,
+            84,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "段付き台座の灰白フード石像、右斜め前45度.png",
+          "sourceCrop": [
+            0,
+            0,
+            355,
+            815
+          ],
+          "scale": 0.23558282
+        },
+        {
+          "direction": 2,
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ],
+          "contentRect": [
+            88,
+            545,
+            79,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "右側面の眠るフード石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            337,
+            816
+          ],
+          "scale": 0.23529412
+        },
+        {
+          "direction": 3,
+          "rect": [
+            0,
+            768,
+            256,
+            256
+          ],
+          "contentRect": [
+            86,
+            801,
+            84,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "灰白フード石像の右斜め後ろ姿.png",
+          "sourceCrop": [
+            0,
+            0,
+            357,
+            813
+          ],
+          "scale": 0.23616236
+        },
+        {
+          "direction": 4,
+          "rect": [
+            0,
+            1024,
+            256,
+            256
+          ],
+          "contentRect": [
+            86,
+            1057,
+            84,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "段付き台座のフード石像・背面.png",
+          "sourceCrop": [
+            0,
+            0,
+            343,
+            785
+          ],
+          "scale": 0.24458599
+        },
+        {
+          "direction": 5,
+          "rect": [
+            0,
+            1280,
+            256,
+            256
+          ],
+          "contentRect": [
+            84,
+            1313,
+            87,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "左斜め後ろから見る眠れる石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            368,
+            810
+          ],
+          "scale": 0.23703704
+        },
+        {
+          "direction": 6,
+          "rect": [
+            0,
+            1536,
+            256,
+            256
+          ],
+          "contentRect": [
+            91,
+            1569,
+            74,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "左側面の眠れるフード石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            315,
+            816
+          ],
+          "scale": 0.23529412
+        },
+        {
+          "direction": 7,
+          "rect": [
+            0,
+            1792,
+            256,
+            256
+          ],
+          "contentRect": [
+            85,
+            1825,
+            86,
+            192
+          ],
+          "anchor": [
+            128,
+            224
+          ],
+          "sourceName": "灰白のフード石像、左斜め前.png",
+          "sourceCrop": [
+            0,
+            0,
+            366,
+            821
+          ],
+          "scale": 0.23386114
+        }
+      ],
+      "directions": [
+        "front",
+        "front_right",
+        "right",
+        "back_right",
+        "back",
+        "back_left",
+        "left",
+        "front_left"
+      ],
+      "logicalFootprint": [
+        2,
+        2
+      ],
+      "unitIdAliases": [
+        "cem-adarius"
+      ],
+      "availableAnimation": "idle"
+    },
+    "adarius_pedestal": {
+      "src": "assets/field/objects/adarius_pedestal.webp",
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frames": 8,
+      "columns": 1,
+      "anchor": [
+        128,
+        192
+      ],
+      "drawWidth": 128,
+      "frameData": [
+        {
+          "direction": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "contentRect": [
+            64,
+            112,
+            128,
+            92
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "台座上の休眠石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            547,
+            395
+          ],
+          "scale": 0.23400366
+        },
+        {
+          "direction": 1,
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "contentRect": [
+            17,
+            332,
+            222,
+            156
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "段付き台座の灰白フード石像、右斜め前45度.png",
+          "sourceCrop": [
+            0,
+            0,
+            597,
+            419
+          ],
+          "scale": 0.37123891
+        },
+        {
+          "direction": 2,
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ],
+          "contentRect": [
+            66,
+            625,
+            124,
+            91
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "右側面の眠るフード石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            518,
+            381
+          ],
+          "scale": 0.23983648
+        },
+        {
+          "direction": 3,
+          "rect": [
+            0,
+            768,
+            256,
+            256
+          ],
+          "contentRect": [
+            30,
+            850,
+            196,
+            144
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "灰白フード石像の右斜め後ろ姿.png",
+          "sourceCrop": [
+            0,
+            0,
+            588,
+            433
+          ],
+          "scale": 0.33366789
+        },
+        {
+          "direction": 4,
+          "rect": [
+            0,
+            1024,
+            256,
+            256
+          ],
+          "contentRect": [
+            64,
+            1136,
+            128,
+            92
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "段付き台座のフード石像・背面.png",
+          "sourceCrop": [
+            0,
+            0,
+            493,
+            355
+          ],
+          "scale": 0.25963489
+        },
+        {
+          "direction": 5,
+          "rect": [
+            0,
+            1280,
+            256,
+            256
+          ],
+          "contentRect": [
+            42,
+            1368,
+            171,
+            134
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "左斜め後ろから見る眠れる石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            582,
+            456
+          ],
+          "scale": 0.29376534
+        },
+        {
+          "direction": 6,
+          "rect": [
+            0,
+            1536,
+            256,
+            256
+          ],
+          "contentRect": [
+            64,
+            1648,
+            128,
+            92
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "左側面の眠れるフード石像.png",
+          "sourceCrop": [
+            0,
+            0,
+            515,
+            369
+          ],
+          "scale": 0.24854369
+        },
+        {
+          "direction": 7,
+          "rect": [
+            0,
+            1792,
+            256,
+            256
+          ],
+          "contentRect": [
+            21,
+            1870,
+            214,
+            152
+          ],
+          "anchor": [
+            128,
+            192
+          ],
+          "sourceName": "灰白のフード石像、左斜め前.png",
+          "sourceCrop": [
+            0,
+            0,
+            624,
+            445
+          ],
+          "scale": 0.34249084
+        }
+      ],
+      "directions": [
+        "front",
+        "front_right",
+        "right",
+        "back_right",
+        "back",
+        "back_left",
+        "left",
+        "front_left"
+      ],
+      "mountAnchors": [
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ]
+      ]
+    }
+  },
+  "files": [
+    {
+      "src": "assets/field/ground/G01_stone_worn.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 75262,
+      "sha256": "c5b3b6347d537b13fec1644c86fa72d93b5df3488903e22030153791e8515576",
+      "kind": "repeat_texture",
+      "id": "G01",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G02_stone_ordered.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 69304,
+      "sha256": "643da70b9c851f5a04e3d36142904f902757afdfabe62994156b97b3b07ba23b",
+      "kind": "repeat_texture",
+      "id": "G02",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G03_soil_gravel.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 89380,
+      "sha256": "850b4a4d61876485aa3a8539c111322e89423be0747403ba005ffe8e44603649",
+      "kind": "repeat_texture",
+      "id": "G03",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G04_road_earth.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 81840,
+      "sha256": "9ca32e15899ba00315b435eebff8d8c7893821e17984b45323e64cb47c07a8f2",
+      "kind": "repeat_texture",
+      "id": "G04",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G05_ash_ground.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 85102,
+      "sha256": "1c91bc988f8a6aaad6498f45da504e1d95d38c5ee61eee665d9d95c06f993793",
+      "kind": "repeat_texture",
+      "id": "G05",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G06_grass_short.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 117556,
+      "sha256": "65bbac4d042257a5e1d219538cfd1caf15c63ee9e5b4170a5e13d060954fd5bc",
+      "kind": "repeat_texture",
+      "id": "G06",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G07_bridge_planks.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 73778,
+      "sha256": "4943ade8cca8e0e732ea1819f4c72c2d4a3c3e2ff5c1cad78e915be4ad4c16ee",
+      "kind": "repeat_texture",
+      "id": "G07",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G08_mud.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 79194,
+      "sha256": "a4a8264664bb0521ffc94528c9e8d0f82954d67211b5cea96282c05c19bd2a2b",
+      "kind": "repeat_texture",
+      "id": "G08",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G09_water.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 56968,
+      "sha256": "5902ceeec0260c44507f5f068fecc5559adad26fe5def8b37fb415e233156e07",
+      "kind": "repeat_texture",
+      "id": "G09",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G10_poison_water.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 66814,
+      "sha256": "474b5e279348ff865cb4f5485229405b3da692ed41117c81f68827d2a6f58f92",
+      "kind": "repeat_texture",
+      "id": "G10",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G11_ice.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 60670,
+      "sha256": "822d040bf6df3703def3a4cd11092a55de90dfc42122ff94d32b946769ff9bd4",
+      "kind": "repeat_texture",
+      "id": "G11",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/ground/G12_lava.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 95642,
+      "sha256": "0495b35cea17abf6312716a7b6f093646b6eced68bd3ec72b5709f2f9d5582ce",
+      "kind": "repeat_texture",
+      "id": "G12",
+      "alpha": false,
+      "period": {
+        "horizontal_cells": 4,
+        "vertical_cells": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/faces/F01_stone_blocks.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 73588,
+      "sha256": "8054f1375f991217f6841fd6f9c3e98399f9589e6ddb50653b5e82cd9c4d616b",
+      "kind": "repeat_texture",
+      "id": "F01",
+      "alpha": false,
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/faces/F02_earth_cut.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 78390,
+      "sha256": "c130c708f204c3174d2407e6aa07a4829d487016d70ba1f05590978ad4eac569",
+      "kind": "repeat_texture",
+      "id": "F02",
+      "alpha": false,
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/faces/F03_stone_cut.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 75086,
+      "sha256": "289d2282c7aa881eb236c4207bb322240559e661f112402d6f419a77e4d080fc",
+      "kind": "repeat_texture",
+      "id": "F03",
+      "alpha": false,
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/faces/F04_wood.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 68600,
+      "sha256": "19bb07bcd74c08089837ae8ad7a9091d0d94567fe9e5044670848500b8b973a9",
+      "kind": "repeat_texture",
+      "id": "F04",
+      "alpha": false,
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/faces/F05_iron.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 48580,
+      "sha256": "c26785a60a3caa2cbbf22f4d2a63bae599aaa21e7bebea0de6530ef78debb53f",
+      "kind": "repeat_texture",
+      "id": "F05",
+      "alpha": false,
+      "period": {
+        "along_face_cells": 4,
+        "height_levels": 4
+      },
+      "wrap": "repeat",
+      "edgeMatched": true
+    },
+    {
+      "src": "assets/field/decals/ground.webp",
+      "width": 396,
+      "height": 264,
+      "bytes": 60976,
+      "sha256": "6699c4cf58f4ed42db802b4f220cd80cccb7328e049c3ef107fd5c11935dee43",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/decals/wall.webp",
+      "width": 780,
+      "height": 260,
+      "bytes": 41112,
+      "sha256": "2a0b7bbbe9e4ad71b6584a86a19dafddd024f9ec8e3d7ecd5fd811a3a6c3b084",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/fx/charge.webp",
+      "width": 128,
+      "height": 128,
+      "bytes": 2814,
+      "sha256": "9ca343f81239543689e192118eeb96d4bee98b5abf1a59a7dd58f0d2649d4e74",
+      "kind": "effect",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/parts/low.webp",
+      "width": 520,
+      "height": 520,
+      "bytes": 125010,
+      "sha256": "7f71ab26a7f49657b4c220778ba7b22567c10c5db3a1caa0cab5cf20ffd1445b",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/parts/gravestone.webp",
+      "width": 780,
+      "height": 520,
+      "bytes": 163362,
+      "sha256": "6c46ea01b091fc6127faace0370492020d5d674a96b128cb0a8dfa05e18a9c7c",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/parts/fence.webp",
+      "width": 1040,
+      "height": 260,
+      "bytes": 63856,
+      "sha256": "7ce93af3e7e9612b102fbadfe57816b3c073a7ec9c37ca2102c39b62e3a0a90b",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/parts/chapel_door.webp",
+      "width": 780,
+      "height": 520,
+      "bytes": 208526,
+      "sha256": "a6e405ce072c803414623ddbd97a7a93fee2b15c478be02cbc60f7c111133074",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/parts/cemetery_gate.webp",
+      "width": 1040,
+      "height": 768,
+      "bytes": 430326,
+      "sha256": "5b0d65824221fd2b7fdd9428db54020ed32cb1183911ba57e38abfe4f29ae844",
+      "kind": "atlas",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/objects/shrub_low.webp",
+      "width": 128,
+      "height": 1024,
+      "bytes": 61218,
+      "sha256": "845ad5823141d4bbc91a087c65a9c7bc13563dc2a7a073192169f88286075d6a",
+      "kind": "direction_strip",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/objects/charred_tree.webp",
+      "width": 128,
+      "height": 1024,
+      "bytes": 30648,
+      "sha256": "07cdd70f3e9486f06cfa5018ee000746ac1f267c477ce9ec6ec43ed6bde4b992",
+      "kind": "direction_strip",
+      "alpha": true
+    },
+    {
+      "src": "assets/units/adarius/idle-sheet.webp",
+      "width": 256,
+      "height": 2048,
+      "bytes": 165380,
+      "sha256": "4a0500cf829628abb43d71c213bba92eccc850100c634654b14dd7e234184c6c",
+      "kind": "direction_strip",
+      "alpha": true
+    },
+    {
+      "src": "assets/field/objects/adarius_pedestal.webp",
+      "width": 256,
+      "height": 2048,
+      "bytes": 214214,
+      "sha256": "50c76bcd8023bde6583dd5035c43316bf14c78a5cb4a43d9bc2c27b9ad426812",
+      "kind": "direction_strip",
+      "alpha": true
+    }
+  ],
+  "imageBytes": 2863196,
+  "decodedRGBA8Bytes": 19597120,
+  "integration": "Asset pack and optional loader; existing render.js is not patched.",
+  "limitations": [
+    "Stone joints and natural patterns are not guaranteed to form a unique geometric topology across repeats; outer pixel edges match.",
+    "Eight directional drawings are not renders of one measured 3D model; final in-game occlusion and perspective review remains necessary.",
+    "Adarius has eight idle directions; no walk/attack/death animation."
+  ]
+}

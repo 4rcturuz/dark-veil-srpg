@@ -14,6 +14,7 @@ export const characterSprites=new CharacterSprites();
 
 // Uploaded sheets are retained byte for byte. Rows are D0–D7, 256×256 each.
 export const SHEET_SPRITES={
+ elena:{src:'assets/elena/idle-sheet.png',columns:4,frameWidth:256,frameHeight:256,frames:8,anchor:[128,247],anchors:[[128,247],[127,246],[122,245],[134,245],[126,251],[127,248],[129,248],[132,249]]},
  kanata:{src:'assets/kanata/idle-sheet.png',frameWidth:256,frameHeight:256,frames:8,anchor:[128,248]},
  // Midpoint of the two boot contacts in each source row, rather than the lowest pixel.
  hoshiyomi:{src:'assets/hoshiyomi/idle-sheet.png',frameWidth:256,frameHeight:256,frames:8,anchor:[125,241],anchors:[[125,241],[124,232],[132,235],[120,241],[126,241],[133,237],[120,229],[124,228]]},
@@ -27,10 +28,10 @@ export class SheetCharacterSprites{
   if(this.image){this.image.src=new URL(spec.src,import.meta.url).href;this.image.decoding='async';}
  }
  draw(ctx,direction){
-  const {image:img,spec:s}=this;
-  if(!Number.isInteger(direction)||direction<0||direction>=s.frames||!img?.complete||img.naturalWidth!==s.frameWidth||img.naturalHeight!==s.frameHeight*s.frames)return false;
+  const {image:img,spec:s}=this,columns=s.columns??1;
+  if(!Number.isInteger(direction)||direction<0||direction>=s.frames||!img?.complete||img.naturalWidth!==s.frameWidth*columns||img.naturalHeight!==s.frameHeight*Math.ceil(s.frames/columns))return false;
   const scale=80/s.frameWidth,anchor=s.anchors?.[direction]??s.anchor;
-  ctx.drawImage(img,0,direction*s.frameHeight,s.frameWidth,s.frameHeight,-anchor[0]*scale,-anchor[1]*scale,s.frameWidth*scale,s.frameHeight*scale);return true;
+  ctx.drawImage(img,(direction%columns)*s.frameWidth,Math.floor(direction/columns)*s.frameHeight,s.frameWidth,s.frameHeight,-anchor[0]*scale,-anchor[1]*scale,s.frameWidth*scale,s.frameHeight*scale);return true;
  }
 }
 export const sheetCharacterSprites=Object.fromEntries(Object.entries(SHEET_SPRITES).map(([id,spec])=>[id,new SheetCharacterSprites(spec)]));
