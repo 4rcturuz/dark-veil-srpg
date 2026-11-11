@@ -1,4 +1,4 @@
-import {TERRAIN,STATUS_NAMES,SKILLS} from './data.js';
+import {TERRAIN,STATUS_NAMES} from './data.js';
 import {effectColor,RANGE_COLORS} from './combat-display.js';
 import {key} from './engine.js';
 import {drawCharacterSprite,directionFrame} from './character-sprites.js';
@@ -312,12 +312,7 @@ export class MapView{
   for(const p of b.sonar()){const q=this.surface(p.x,p.y),px=q.x,py=q.y;c.strokeStyle='#d5bd8644';c.beginPath();c.ellipse(px,py,18,9,0,0,Math.PI*2);c.stroke();c.font='bold 17px Georgia';c.fillStyle='#dcc799';c.textAlign='center';c.fillText('?',px,py-10);}
   if(st.path)for(const p of st.path){const q=this.surface(p.x,p.y);ellipse(c,q.x,q.y,2.5,1.6,'#eedeb5');}
   this.effects=this.effects.filter(e=>time-e.time<(['damage','heal'].includes(e.type)?HP_FEEDBACK.duration:1100));
-  for(const e of this.effects){if(['damage','heal'].includes(e.type))continue;const age=time-e.time,p=this.surface(e.x,e.y);c.globalAlpha=1-age/1100;if(e.type==='skill'){
-    if(SKILLS[e.skill]?.visualShots===2&&e.target){
-     const target=this.surface(e.target.x,e.target.y);
-     for(const onset of [40,240]){const shotAge=age-onset;if(shotAge>=0&&shotAge<180){const alpha=1-shotAge/180;c.save();c.globalAlpha=alpha;c.strokeStyle='#ffe6a2';c.lineWidth=2;c.beginPath();c.moveTo(p.x,p.y-43);c.lineTo(target.x,target.y-38);c.stroke();ellipse(c,p.x,p.y-43,7*alpha+2,4*alpha+1,'#fff0a9');c.restore();}}
-    }
-    c.strokeStyle='#d7c68c';c.lineWidth=2;c.beginPath();c.ellipse(p.x,p.y,15+age/35,7+age/70,0,0,Math.PI*2);c.stroke();c.lineWidth=1;}else{c.font='bold 18px Georgia';c.textAlign='center';c.fillStyle='#ede4c8';c.strokeStyle='#12252a';c.lineWidth=3;c.strokeText('MISS',p.x,p.y-55-age/30);c.fillText('MISS',p.x,p.y-55-age/30);c.lineWidth=1;}c.globalAlpha=1;}
+  for(const e of this.effects){if(['damage','heal'].includes(e.type))continue;const age=time-e.time,p=this.surface(e.x,e.y);c.globalAlpha=1-age/1100;if(e.type==='skill'){c.strokeStyle='#d7c68c';c.lineWidth=2;c.beginPath();c.ellipse(p.x,p.y,15+age/35,7+age/70,0,0,Math.PI*2);c.stroke();c.lineWidth=1;}else{c.font='bold 18px Georgia';c.textAlign='center';c.fillStyle='#ede4c8';c.strokeStyle='#12252a';c.lineWidth=3;c.strokeText('MISS',p.x,p.y-55-age/30);c.fillText('MISS',p.x,p.y-55-age/30);c.lineWidth=1;}c.globalAlpha=1;}
   c.restore();
   this.drawHpFeedback(time,objects);
   // Screen-sized labels stay readable at every zoom and render above obstacles.

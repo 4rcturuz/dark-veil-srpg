@@ -1,0 +1,248 @@
+{
+  "src": "assets/units/adarius/idle-sheet.webp",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frames": 8,
+  "columns": 1,
+  "anchor": [
+    128,
+    224
+  ],
+  "drawWidth": 128,
+  "frameData": [
+    {
+      "direction": 0,
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "contentRect": [
+        86,
+        33,
+        85,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "台座上の休眠石像.png",
+      "sourceCrop": [
+        0,
+        0,
+        377,
+        847
+      ],
+      "scale": 0.22668241
+    },
+    {
+      "direction": 1,
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "contentRect": [
+        86,
+        289,
+        84,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "段付き台座の灰白フード石像、右斜め前45度.png",
+      "sourceCrop": [
+        0,
+        0,
+        355,
+        815
+      ],
+      "scale": 0.23558282
+    },
+    {
+      "direction": 2,
+      "rect": [
+        0,
+        512,
+        256,
+        256
+      ],
+      "contentRect": [
+        88,
+        545,
+        79,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "右側面の眠るフード石像.png",
+      "sourceCrop": [
+        0,
+        0,
+        337,
+        816
+      ],
+      "scale": 0.23529412
+    },
+    {
+      "direction": 3,
+      "rect": [
+        0,
+        768,
+        256,
+        256
+      ],
+      "contentRect": [
+        86,
+        801,
+        84,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "灰白フード石像の右斜め後ろ姿.png",
+      "sourceCrop": [
+        0,
+        0,
+        357,
+        813
+      ],
+      "scale": 0.23616236
+    },
+    {
+      "direction": 4,
+      "rect": [
+        0,
+        1024,
+        256,
+        256
+      ],
+      "contentRect": [
+        86,
+        1057,
+        84,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "段付き台座のフード石像・背面.png",
+      "sourceCrop": [
+        0,
+        0,
+        343,
+        785
+      ],
+      "scale": 0.24458599
+    },
+    {
+      "direction": 5,
+      "rect": [
+        0,
+        1280,
+        256,
+        256
+      ],
+      "contentRect": [
+        84,
+        1313,
+        87,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "左斜め後ろから見る眠れる石像.png",
+      "sourceCrop": [
+        0,
+        0,
+        368,
+        810
+      ],
+      "scale": 0.23703704
+    },
+    {
+      "direction": 6,
+      "rect": [
+        0,
+        1536,
+        256,
+        256
+      ],
+      "contentRect": [
+        91,
+        1569,
+        74,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "左側面の眠れるフード石像.png",
+      "sourceCrop": [
+        0,
+        0,
+        315,
+        816
+      ],
+      "scale": 0.23529412
+    },
+    {
+      "direction": 7,
+      "rect": [
+        0,
+        1792,
+        256,
+        256
+      ],
+      "contentRect": [
+        85,
+        1825,
+        86,
+        192
+      ],
+      "anchor": [
+        128,
+        224
+      ],
+      "sourceName": "灰白のフード石像、左斜め前.png",
+      "sourceCrop": [
+        0,
+        0,
+        366,
+        821
+      ],
+      "scale": 0.23386114
+    }
+  ],
+  "directions": [
+    "front",
+    "front_right",
+    "right",
+    "back_right",
+    "back",
+    "back_left",
+    "left",
+    "front_left"
+  ],
+  "logicalFootprint": [
+    2,
+    2
+  ],
+  "unitIdAliases": [
+    "cem-adarius"
+  ],
+  "availableAnimation": "idle"
+}
