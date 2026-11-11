@@ -1,0 +1,254 @@
+{
+  "status": "passed",
+  "baseline": "alpha0.32",
+  "scope": "Asset validation and standalone browser preview/loader; no game renderer integration test.",
+  "image_count": 29,
+  "image_bytes": 2863196,
+  "checks": [
+    {
+      "file": "assets/field/ground/G01_stone_worn.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G02_stone_ordered.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G03_soil_gravel.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G04_road_earth.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G05_ash_ground.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G06_grass_short.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G07_bridge_planks.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G08_mud.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G09_water.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G10_poison_water.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G11_ice.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/ground/G12_lava.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/faces/F01_stone_blocks.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/faces/F02_earth_cut.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/faces/F03_stone_cut.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/faces/F04_wood.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/faces/F05_iron.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "assets/field/decals/ground.webp",
+      "status": "pass",
+      "dimensions": [
+        396,
+        264
+      ]
+    },
+    {
+      "file": "assets/field/decals/wall.webp",
+      "status": "pass",
+      "dimensions": [
+        780,
+        260
+      ]
+    },
+    {
+      "file": "assets/field/fx/charge.webp",
+      "status": "pass",
+      "dimensions": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "assets/field/parts/low.webp",
+      "status": "pass",
+      "dimensions": [
+        520,
+        520
+      ]
+    },
+    {
+      "file": "assets/field/parts/gravestone.webp",
+      "status": "pass",
+      "dimensions": [
+        780,
+        520
+      ]
+    },
+    {
+      "file": "assets/field/parts/fence.webp",
+      "status": "pass",
+      "dimensions": [
+        1040,
+        260
+      ]
+    },
+    {
+      "file": "assets/field/parts/chapel_door.webp",
+      "status": "pass",
+      "dimensions": [
+        780,
+        520
+      ]
+    },
+    {
+      "file": "assets/field/parts/cemetery_gate.webp",
+      "status": "pass",
+      "dimensions": [
+        1040,
+        768
+      ]
+    },
+    {
+      "file": "assets/field/objects/shrub_low.webp",
+      "status": "pass",
+      "dimensions": [
+        128,
+        1024
+      ]
+    },
+    {
+      "file": "assets/field/objects/charred_tree.webp",
+      "status": "pass",
+      "dimensions": [
+        128,
+        1024
+      ]
+    },
+    {
+      "file": "assets/units/adarius/idle-sheet.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        2048
+      ]
+    },
+    {
+      "file": "assets/field/objects/adarius_pedestal.webp",
+      "status": "pass",
+      "dimensions": [
+        256,
+        2048
+      ]
+    }
+  ],
+  "browser": {
+    "status": "not_run",
+    "reason": "Headless Chromium startup prohibited by environment socket restrictions; cloud browser blocks file URL access. No browser verification claimed."
+  },
+  "loader": {
+    "status": "pass",
+    "method": "Node with file-backed fetch/Image mocks and draw argument assertions; no browser render",
+    "loaded": 29,
+    "drawCalls": 84,
+    "directionChecks": 128,
+    "previewSyntax": "pass",
+    "selectiveLoad": "pass"
+  }
+}

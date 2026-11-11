@@ -1,0 +1,9 @@
+{
+  "status": "pass",
+  "method": "Node with file-backed fetch/Image mocks and draw argument assertions; no browser render",
+  "loaded": 29,
+  "drawCalls": 84,
+  "directionChecks": 128,
+  "previewSyntax": "pass",
+  "selectiveLoad": "pass"
+}

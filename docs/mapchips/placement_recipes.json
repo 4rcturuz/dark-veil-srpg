@@ -1,0 +1,252 @@
+{
+  "status": "Images built; renderer integration not applied.",
+  "coordinate_convention": {
+    "map_internal": "zero based tile centers",
+    "atlas": "top-left pixels; rect=[x,y,w,h]",
+    "elevation_draw_units": 40
+  },
+  "layers": [
+    {
+      "id": "surface",
+      "assets": "G*",
+      "position": "actual projected tile or bridge top"
+    },
+    {
+      "id": "surface_detail",
+      "assets": "D01 D02 D03 D05 D07",
+      "position": "same plane as host surface"
+    },
+    {
+      "id": "geometry",
+      "assets": "F* P*",
+      "position": "individual visible faces of blocks, stairs, props and structures"
+    },
+    {
+      "id": "face_detail",
+      "assets": "D04 D08_branch D08_hang; optional reuse D07",
+      "position": "host face local UV"
+    },
+    {
+      "id": "objects_units",
+      "assets": "O01 O03 adarius body/pedestal",
+      "position": "world foot anchor; depth sorted with terrain and structures"
+    },
+    {
+      "id": "fx_ui",
+      "assets": "D06 plus existing procedural UI",
+      "position": "effects respect occlusion/fog; UI separate"
+    }
+  ],
+  "depth_rule": "Layer IDs categorize assets; NOT a global fixed painter order. Reuse current mixed depth sort; split extended structures into sortable faces/parts.",
+  "statue": {
+    "body": "assets/units/adarius/idle-sheet.webp",
+    "base": "assets/field/objects/adarius_pedestal.webp",
+    "internal_cells": [
+      [
+        11,
+        17
+      ],
+      [
+        12,
+        17
+      ],
+      [
+        11,
+        18
+      ],
+      [
+        12,
+        18
+      ]
+    ],
+    "center": [
+      11.5,
+      17.5
+    ],
+    "worldFacing": [
+      0,
+      1
+    ],
+    "invertY": true,
+    "body_mount_height_draw_units": 32,
+    "base_visual_footprint_cells": [
+      1.6,
+      1.6
+    ],
+    "scale_note": "Body and pedestal contact positions calibrated in exported images; logical 2x2 footprint unchanged. Pedestal drawing height=32 after calibration.",
+    "dormant": "base at original center; body foot at matching pedestal mountAnchors[direction], 32 drawing units above ground",
+    "awake": "same body strip at moving 2x2 unit center x+0.5,y+0.5; no base attached",
+    "awakening_transition": "body lowers from base mount height to ground through event transform; do not change image scale or snap contact anchor",
+    "base_after_awakening": "Recommended visual-only remnant at original location; no new blocking, elevation, targeting or terrain effect. Separate visibility flag required.",
+    "spriteKey": "adarius",
+    "runtime_unit_id": "cem-adarius",
+    "type_field": "tutorialType=adarius",
+    "animations_available": [
+      "idle with 8 directions"
+    ],
+    "missing_animations": [
+      "walk cycle",
+      "attack poses",
+      "hit reaction",
+      "death poses"
+    ],
+    "reuse_limit": "Current translate-and-turn movement can reuse idle art. This does not supply full combat animation.",
+    "body_mount_height_draw_units_by_direction": [
+      32.0,
+      32.0,
+      32.0,
+      32.0,
+      32.0,
+      32.0,
+      32.0,
+      32.0
+    ]
+  },
+  "gate": {
+    "atlas": "assets/field/parts/cemetery_gate.webp",
+    "internal_passage_cells": [
+      [
+        11,
+        22
+      ],
+      [
+        12,
+        22
+      ],
+      [
+        13,
+        22
+      ],
+      [
+        11,
+        23
+      ],
+      [
+        12,
+        23
+      ],
+      [
+        13,
+        23
+      ]
+    ],
+    "center": [
+      12,
+      22.5
+    ],
+    "states": [
+      "weathered",
+      "collapsed"
+    ],
+    "state_source": "map.gate.ruined",
+    "mapping": "front wall, posts, upper gable, timber, opening/frame as separate geometry; F01 back/sides and F03 broken ends; two-sided front PNG alone insufficient",
+    "passage_rule": "keep six logical exit cells unchanged; no tall rubble or columns in passage",
+    "reference_only": [
+      "P05_master_weathered",
+      "P05_master_collapsed"
+    ]
+  },
+  "geometry_recipes": {
+    "rubble": "P01 top clusters + low irregular geometry; F03 sides; decorative-only clusters may remain flat; collision independent",
+    "gravestone": "P02 front/back/side/top on one thin rounded-head solid; P02_top is rectangular corrected image; broken uses F03 fracture; no baked ground",
+    "fence": "P03 straight/broken on paired front/back planes with F05 edge thickness, P03_post on narrow upright geometry; fallen on actual low plane; poles separated for depth",
+    "chapel_door": "P04 leaves front/back on hinge-controlled thin solids; F04 thickness; P04_frame on stone geometry, P04_tracery in upper opening; F01/F03 sides; master is reference only",
+    "spikes": "P06_triangle is side face, not complete sprite; extrude wedge or triangular spike, F05 other faces; compose a patch above floor; logical thorn cells unchanged",
+    "stairs": "G01/G02 treads + F01/F03 risers; actual elevation difference 40 per level; initially four risers of 10 for one level; orient by high/low neighboring cells, not camera",
+    "bridge": "G07 top + F04 beams/supports; material UV rotates with whole bridge; preserve logical road assignment",
+    "pit": "continuous outer boundary + appropriate F02/F03 exposed sides + game shadow/void; no new texture required; adjoining pits form one opening"
+  },
+  "material_examples": [
+    {
+      "map": "廃墟の聖堂1/3〜3/3",
+      "floor": [
+        "G01",
+        "G02"
+      ],
+      "faces": [
+        "F01",
+        "F03",
+        "F04"
+      ],
+      "details": [
+        "D01",
+        "D03",
+        "D04",
+        "D08_branch",
+        "D08_hang"
+      ],
+      "objects": [
+        "P01",
+        "P04"
+      ],
+      "note": "pit/stairs/doors from map geometry; do not infer from image"
+    },
+    {
+      "map": "灰の墓地",
+      "floor": [
+        "G05",
+        "G01",
+        "G03",
+        "G06"
+      ],
+      "faces": [
+        "F01",
+        "F02",
+        "F03",
+        "F05"
+      ],
+      "details": [
+        "D01",
+        "D02",
+        "D03",
+        "D07",
+        "D08_branch",
+        "D08_hang"
+      ],
+      "objects": [
+        "P01",
+        "P02",
+        "P03",
+        "P05",
+        "O02",
+        "O03"
+      ],
+      "note": "ash inside; surviving greenery outside; dormant statue uses same body as enemy"
+    },
+    {
+      "map": "本編の古道・旧水路・礼拝堂・防衛線",
+      "floor": [
+        "G03",
+        "G04",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12"
+      ],
+      "faces": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "details": [
+        "D01",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07"
+      ],
+      "objects": [
+        "P01",
+        "P06",
+        "O01"
+      ],
+      "note": "select by map theme and appearance override, not one-to-one terrain ID"
+    }
+  ]
+}

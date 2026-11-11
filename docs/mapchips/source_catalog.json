@@ -1,0 +1,695 @@
+{
+  "G01": {
+    "source_name": "古びた灰色の石床.png",
+    "sha256": "20308e4f7983f253bb4ca71698e60f082ebfece473b49aad79a7c86380691c65",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G02": {
+    "source_name": "整然とした灰色の古石床.png",
+    "sha256": "6a4f801cab449a69e0d0f7aa28dbba57ac29a0843303bc689c4a34f416adde60",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G03": {
+    "source_name": "灰褐色の土砂利テクスチャ.png",
+    "sha256": "9ea9dcf61621e0c06b0213e9e1b7cfd65e2f596ceba45243438c6a1653ad0007",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G04": {
+    "source_name": "踏み固めた古道の土肌.png",
+    "sha256": "0772eb847c7b6baa628aec81e5cbd7611ca48568a2c2f6c3a09764004cb6e242",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G05": {
+    "source_name": "灰と煤が混じる焦土.png",
+    "sha256": "9d4127c5841cf8e4fe0affac9c85f00da723744124004a801c9c3c25d513b0eb",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G06": {
+    "source_name": "青緑の短草地.png",
+    "sha256": "5f0d368a5078e052d4c99ed0f9544915c57f7f17195835fd5589a6e9385fa281",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G07": {
+    "source_name": "風化した木橋の板張り.png",
+    "sha256": "de641e9e7139dfd69b3b89374e6714be81173e53119d131671f54aff496838b3",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G08": {
+    "source_name": "冷灰褐色の踏み荒らされた湿泥.png",
+    "sha256": "8f63813ae081474a7ffbe5802529af7d437e278ab37a6ba01fd6837a68f1c3a7",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G09": {
+    "source_name": "暗い水流の連続テクスチャ.png",
+    "sha256": "e5623c7949477f37b8bd7a4428a371c48ecfd36e8a1f48392fef84e40a1e3ee5",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G10": {
+    "source_name": "朽ちた毒沼の水面.png",
+    "sha256": "8d0777e85bf3830f692186dc211b5b3065ca3fc91c9fe4374aa8c6303feb823f",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G11": {
+    "source_name": "霜模様の淡青氷床.png",
+    "sha256": "894c432190fbe0b7155728e78bc119c1d5227c7aeb76d9dce6b244918f52fdd6",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "G12": {
+    "source_name": "黒い溶岩に走る赤熱の亀裂.png",
+    "sha256": "bd2ebe0b56edb64c6b1c2cdb217690a260f279ed50073642f9bfd0b07f7cd815",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "F01": {
+    "source_name": "古びた灰色切石壁の反復材質.png",
+    "sha256": "64209370bbb02c74bb0857473091eb314f9879829823454de1ce00df9f5d2e92",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "F02": {
+    "source_name": "灰褐色の締まった土の垂直断面.png",
+    "sha256": "a5e6ccffb23518336a9a4faee6588ed364b406e477db0f6cbb44e23ed40ad295",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "F03": {
+    "source_name": "粗く割れた灰色石の断面.png",
+    "sha256": "88d4c8ef8116366a9afc9be4af8c339780dd7c22ed59471781d4c2c37b62d18b",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "F04": {
+    "source_name": "灰褐色の風化木肌テクスチャ.png",
+    "sha256": "5561c5a3eff6027f760110b7ec6e275c6472b0e2ce477cd21f8726c89703cac9",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "F05": {
+    "source_name": "古びた黒褐色鉄の反復材質.png",
+    "sha256": "27a9a7e33f88e371c3bf17bb3bc5c204d0464d2dbb946bb468146be96cd869e7",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D01": {
+    "source_name": "灰ベージュの石片と砂粒.png",
+    "sha256": "6e71592ced932b616aa224354cb52d6431aee907c3dcc31a810c8605d277db33",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D02": {
+    "source_name": "薄く吹き寄せた灰と煤.png",
+    "sha256": "eea3d75571be8a79f9f4ff0cabe52fb5919b421d4b62de70de9cad01ff288194",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D03": {
+    "source_name": "青緑の苔と短草の束.png",
+    "sha256": "2ab98db41fa0fb1c6725024f02213295f4316892d5a64f86b6fa8881c6e8d76c",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D04": {
+    "source_name": "古石に走る深い分岐亀裂.png",
+    "sha256": "0afc270f4a8bae1b0f87a11f0612015df5034d66189414ef0be667d90ffc6a20",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D05": {
+    "source_name": "植物を除いた灰色の石板.png",
+    "sha256": "64caa6b328bcfb584c438e109391eb8b935016309e8611bf2e9553ff9d6fa574",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D06": {
+    "source_name": "細い紫電弧の透明装飾.png",
+    "sha256": "067f7410114a666e82d4da9684fe3f5deb34c46dcfc8146d2b1a669205afddbd",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D07": {
+    "source_name": "暗灰緑の湿染みテクスチャ.png",
+    "sha256": "2cf195cc263715b38677e6a232b47c473c3c9445880658fc913c0a4342a18882",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "D08_branch": {
+    "source_name": "分岐した蔦の精密切り抜き.png",
+    "sha256": "97d6dadfd3e179f2c57d0d98d87fb181e63850da0c0d2b64f0f28cbf52670eb8",
+    "size_px": [
+      1246,
+      1263
+    ],
+    "role": "runtime_source"
+  },
+  "D08_hang": {
+    "source_name": "青緑の短い垂れ蔦.png",
+    "sha256": "b6a2bd0f8d50bb99afbdce5ab6ade576e1511e0d61e802f7b534c2d9b81720d3",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P01a_top": {
+    "source_name": "散在する小石の上面.png",
+    "sha256": "a538993779860b5d2052dd248bda3ba7c168b9579cc1f99244f1c33dbc63bba0",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P01b_top": {
+    "source_name": "左側に寄せた崩落石の上面.png",
+    "sha256": "d08aa56e1b7d092aeb7fec2e8a19feaa18b1e619100ba7cd4e45ec9f33bbf4bb",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P01c_top": {
+    "source_name": "低い崩落石の上面.png",
+    "sha256": "8ff83744b50dd300eb6c8997b1de5fbddd13b320c7fb1454072c01a64cced10f",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P02_front": {
+    "source_name": "風化した丸頭の灰色墓石.png",
+    "sha256": "b2e6ff57b40799976cf8f3a9e76079e0eaec780e66450f38f37f0e32f926fd91",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P02_back": {
+    "source_name": "古びた丸頭墓石の背面.png",
+    "sha256": "dc0224e56661a0677423011536644a530cd440c4a619466ebacb6c556ec71823",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P02_side": {
+    "source_name": "丸頭墓石の厚み側面.png",
+    "sha256": "750528d70c5c7364653f3b2a0fa3bec6ae37c791cc98fe0ef811b474b578862b",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P02_top": {
+    "source_name": "古石碑の細長い上面.png",
+    "sha256": "885c7123e7cbeaa077197d8a66568a52f6e424d60a8e6b8cbdffda075c3d6c00",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P02_broken": {
+    "source_name": "低い破断墓石の正面片.png",
+    "sha256": "4e013b3fcd7f32f0a5b24b71f6130b051cee31388e446551ee35ce23cacb98ae",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P03_straight": {
+    "source_name": "古びた黒鉄柵の一節.png",
+    "sha256": "e700d978682e155dd64ff6aac1bc0ccbdf9768fd960cfe33d4b0225ee89f3b9a",
+    "size_px": [
+      1774,
+      887
+    ],
+    "role": "runtime_source"
+  },
+  "P03_post": {
+    "source_name": "黒鉄の槍先付き支柱.png",
+    "sha256": "c7f07e1bcf6a65af9632432900baabd6744b487412c718cce17154db23884dad",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P03_broken": {
+    "source_name": "折れた古鉄の柵.png",
+    "sha256": "5237411f9d64043ba7e22c8ce2e055319f11331b0fdf57c93fa436eb3048fbb7",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P03_fallen": {
+    "source_name": "折れた黒鉄柵の一節.png",
+    "sha256": "994076977a37611e1825ab16ef16c70de51727178f2e8f6cf33594dac1e0ed92",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P04_left_front": {
+    "source_name": "古びた聖堂の木製扉.png",
+    "sha256": "257f5f0a675ead00116484ba723c8c5dfb0b7d4ff7cc0323cc40a618a82c097d",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P04_right_front": {
+    "source_name": "古びた聖堂の右扉.png",
+    "sha256": "362ea784a88bcb01d49b5cdfaf8ea8540e574dbb071ba037555fad1161c5f5ea",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P04_left_back": {
+    "source_name": "左扉の木製裏面.png",
+    "sha256": "a69a58ee871ce2f7cf249f79b794fd78b29990cd37a62d702e517f6076636c12",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P04_right_back": {
+    "source_name": "古木の右扉・裏面.png",
+    "sha256": "32bb143f152dc10af3604a5b0e638f5aa36ddc0cee6b575fd7eb5957c8c1511c",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P04_frame": {
+    "source_name": "尖頭アーチの石枠と左右の石柱.png",
+    "sha256": "2d0fd43624c47fd491e741b9dbeadfb12115e6f71b078196683514859479857c",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P04_tracery": {
+    "source_name": "尖頭アーチ内の花弁状石透かし.png",
+    "sha256": "5da5d28e784bbb060734e4b40f31c696a544aa540513ca2950bf5ce081776974",
+    "size_px": [
+      1774,
+      887
+    ],
+    "role": "runtime_source"
+  },
+  "P05_wall_weathered": {
+    "source_name": "損傷した切妻の石積み正面壁.png",
+    "sha256": "66bfc83a37bc98e05874a7e4fbf2070bf0d2dd80872d0e8e9330b052362c08ec",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P05_wall_collapsed": {
+    "source_name": "崩落した石積みの正面壁.png",
+    "sha256": "7a12e9d21d7d5b6e732a6c622745f13ac5f0c1fc8c65a0f62d79d9ea8ce2a60c",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P05_timber_weathered": {
+    "source_name": "露出した損傷門の木組み.png",
+    "sha256": "96b488971ad59ca748c5d8e3ac14401ac3bdb831d2941e8ddbb3718a8d7e0c3a",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P05_timber_collapsed": {
+    "source_name": "崩落跡の残存木組み.png",
+    "sha256": "10eadc8f30558b6a29b9f2506220695f7b4b37d248f0ebaa6487b3bec214cfa2",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P05_frame": {
+    "source_name": "門のコ字型石枠.png",
+    "sha256": "6e515dfca9562173b38266102096cefd526b4e0dd6ca144a9e7249b470fa454f",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P05_rose": {
+    "source_name": "放射状の石造円窓.png",
+    "sha256": "3ebc7fd073cbc7e164a3cd9bd3debf2f842a3b7867058c784b7dc17f17d1277a",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P05_fracture": {
+    "source_name": "欠けた石壁の破断面素材.png",
+    "sha256": "0ccf541dbd11b2555d7ac3177d30f0255370205c72f8e428b6110be78e517330",
+    "size_px": [
+      1774,
+      887
+    ],
+    "role": "runtime_source"
+  },
+  "P05_fallen": {
+    "source_name": "石と古木の低い崩落片.png",
+    "sha256": "dad5c79131dcfb0d400a06918a4b86c8beca727832f304f4d0f3d0daaff5903b",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "P06_triangle": {
+    "source_name": "古鉄の短い三角棘.png",
+    "sha256": "d710f37e9223e594419be28f34203ab31666c1e57f8c41bc12027e4dc517c44a",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V0": {
+    "source_name": "青緑の低い灌木.png",
+    "sha256": "d6aa6b4c2215a6b1b6919bae5b06668e4dd11cd380dedae0166c91f6d75e6730",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V1": {
+    "source_name": "右斜め前の低い灌木.png",
+    "sha256": "ed0e04ebe8d1351d266e51670ebf2e4628bf70a9abe496f469c74a72e76ce6a0",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V2": {
+    "source_name": "低木の右側面ビュー.png",
+    "sha256": "146e3af3a0eb0eceae355a47c99d918f001216c68a6ce85e68605042c5a5d0b2",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V3": {
+    "source_name": "右斜め後ろの低い灌木.png",
+    "sha256": "22756259b92b66e98413df0ff03b8fbb03f27d49ca90e6bc7cdde40cdc7eea79",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V4": {
+    "source_name": "低い灌木の背面ビュー.png",
+    "sha256": "2391023c1c63ff1179de7a25a3dfa8382fdde471203b41315d3278986cfdd949",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V5": {
+    "source_name": "青緑の低灌木・左斜め後ろ姿.png",
+    "sha256": "ee0c06fd921655a63aeb9326703ddc3b0587db4609ba97c2c608c119125e9314",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V6": {
+    "source_name": "低い灌木の左側面.png",
+    "sha256": "c24cf32bbd0d5b8dd98ecbd411b8a394308bad0eb6ecc53b2a43c4a6edc074f8",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O01_V7": {
+    "source_name": "左斜め前の低木.png",
+    "sha256": "2313dd334e7de7bff7c7bacd67123ffe137276974ef64db109c59031366a9deb",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V0": {
+    "source_name": "台座上の休眠石像.png",
+    "sha256": "8a71ffc4cd9dd912cd952a8404fb54011b3bb2fad09c24abaff73ed54b42a910",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V1": {
+    "source_name": "段付き台座の灰白フード石像、右斜め前45度.png",
+    "sha256": "8b2fb6d8e606e00aa149872ecdf68e5198bca1db1714d3043b8f8293e6f6dd14",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V2": {
+    "source_name": "右側面の眠るフード石像.png",
+    "sha256": "a414ee0a981f1f35083bfecf43d705410064abcb41c380a54d7674f51e6de845",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V3": {
+    "source_name": "灰白フード石像の右斜め後ろ姿.png",
+    "sha256": "0bc664923e36c72e6bd207ff32b83cebb7f6cfc60f5d6dd7e7f6ff0f07f92950",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V4": {
+    "source_name": "段付き台座のフード石像・背面.png",
+    "sha256": "a4375456190dceab04ae5f059a1b7b2e662580cb0ed4f00630a981c4b7440bc5",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V5": {
+    "source_name": "左斜め後ろから見る眠れる石像.png",
+    "sha256": "12145fc7296c3fdd7c8daed8088a4d5c4f5696deb4a0b430a924875bf5a7ff6d",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V6": {
+    "source_name": "左側面の眠れるフード石像.png",
+    "sha256": "2e9f33a9531cc685de12c2409191ec181fd204624bc80da3994b95e5611c264c",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O02_V7": {
+    "source_name": "灰白のフード石像、左斜め前.png",
+    "sha256": "73f9c0e2dfaa8a8ca1b3cfd484c42d03fbcf4d777ee1dedf4f868d40af33a018",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V0": {
+    "source_name": "焼け焦げた枯れ木.png",
+    "sha256": "097c485bdb73a650fba691db8ab3c0ad9878750906bca46898d92c4bc17c7dd9",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V1": {
+    "source_name": "焼けた立木の右斜め前ビュー.png",
+    "sha256": "fa1dbedd81236293950e910184411380e2b74f1bb67ad1f216ca64e5f9ee80b8",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V2": {
+    "source_name": "焼け焦げた枯れ木の右側面.png",
+    "sha256": "ece62366abfba294fdd045d5c25d7cfb2034cb3ed7cf27470d922a23d23ca1bc",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V3": {
+    "source_name": "焼けた立木の右斜め後ろ姿.png",
+    "sha256": "d28fd2642600a2873f49e07c686f8b30f6cc4732e995aee429a457faa464817c",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V4": {
+    "source_name": "焼けた立木の完全な背面.png",
+    "sha256": "7117c4844c66adfa5797660b5a3bc1ad7ec21c116d1c55338d84bac8ffb97931",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V5": {
+    "source_name": "焼けた立木の左斜め後ろ姿.png",
+    "sha256": "aa9b1fd77e3aa3443a5903c11eb9f0af588f2ed50a759273ab159eb56f36f745",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V6": {
+    "source_name": "焼けた立木の左側面.png",
+    "sha256": "e1ca0af9fb10579e555abb645f4fda02d40e3a25555321e59381acf3b39c9b7f",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  },
+  "O03_V7": {
+    "source_name": "焼けた立木の左斜め前面.png",
+    "sha256": "88e8cf73fb5364775bc64ce0c73dcc75b8411e40c7bc79dabfab763ad19e3fa5",
+    "size_px": [
+      1254,
+      1254
+    ],
+    "role": "runtime_source"
+  }
+}

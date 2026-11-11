@@ -1,0 +1,143 @@
+[
+  {
+    "id": "G01",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "古びた灰色の石床.png"
+  },
+  {
+    "id": "G02",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "整然とした灰色の古石床.png"
+  },
+  {
+    "id": "G03",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "灰褐色の土砂利テクスチャ.png"
+  },
+  {
+    "id": "G04",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "踏み固めた古道の土肌.png"
+  },
+  {
+    "id": "G05",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "灰と煤が混じる焦土.png"
+  },
+  {
+    "id": "G06",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "青緑の短草地.png"
+  },
+  {
+    "id": "G07",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "風化した木橋の板張り.png"
+  },
+  {
+    "id": "G08",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "冷灰褐色の踏み荒らされた湿泥.png"
+  },
+  {
+    "id": "G09",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "暗い水流の連続テクスチャ.png"
+  },
+  {
+    "id": "G10",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "朽ちた毒沼の水面.png"
+  },
+  {
+    "id": "G11",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "霜模様の淡青氷床.png"
+  },
+  {
+    "id": "G12",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "黒い溶岩に走る赤熱の亀裂.png"
+  },
+  {
+    "id": "F01",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "古びた灰色切石壁の反復材質.png"
+  },
+  {
+    "id": "F02",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "灰褐色の締まった土の垂直断面.png"
+  },
+  {
+    "id": "F03",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "粗く割れた灰色石の断面.png"
+  },
+  {
+    "id": "F04",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "灰褐色の風化木肌テクスチャ.png"
+  },
+  {
+    "id": "F05",
+    "operation": "Lanczos downsample; periodic smooth-component correction; three-pixel edge reconciliation",
+    "source": "古びた黒褐色鉄の反復材質.png"
+  },
+  {
+    "id": "O02_V0",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "台座上の休眠石像.png",
+    "editedSourceFile": "exec-a784d26a-7b33-4d66-8262-e02b5df33675.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet, ONE statue split into two components. Edit the supplied O02 V0 FRONT VIEW artwork without changing its character design, stone color, robe folds, pose, apparent viewing angle, material paint style or lighting. Output a wide transparent canvas with exactly TWO isolated components side by side, ample empty transparent gap between them: LEFT the hooded stone statue BODY ONLY with absolutely no pedestal, no rectangular floor slab, no ground shadow; RIGHT the original rectangular tiered stone PEDESTAL ONLY with the statue removed, naturally reconstruct the continuous stone top surface hidden under the robe. The body must keep the existing full robe down to its natural irregular hem; do not cut off the hem in a straight line. Preserve the original front-view symmetrical orientation of both components. Both components complete, neither cut off. Same uniform physical scale between body and pedestal. Sharp clean alpha edges with no white, black, colored fringe, checkerboard or backdrop. No labels, text, arrows, border, extra views, new weapon or anatomy. This is source-part editing at full detail, NOT final pixel-size resizing or format conversion."
+  },
+  {
+    "id": "O02_V1",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "段付き台座の灰白フード石像、右斜め前45度.png",
+    "editedSourceFile": "exec-5b0c551c-3b5b-40ea-b32e-47d6dd75f645.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V1. Edit target is the supplied artwork. Preserve exactly its front-right three-quarter, facing toward screen right orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  },
+  {
+    "id": "O02_V2",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "右側面の眠るフード石像.png",
+    "editedSourceFile": "exec-037b71ea-96bf-4f4a-941c-94d7b731b7df.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V2. Edit target is the supplied artwork. Preserve exactly its full right profile, facing screen right orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  },
+  {
+    "id": "O02_V3",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "灰白フード石像の右斜め後ろ姿.png",
+    "editedSourceFile": "exec-f8866455-848e-4e0b-9474-54107febb97f.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V3. Edit target is the supplied artwork. Preserve exactly its rear-right three-quarter, mostly back visible orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  },
+  {
+    "id": "O02_V4",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "段付き台座のフード石像・背面.png",
+    "editedSourceFile": "exec-d01448e0-e979-49a2-a45b-bbf9f44508ff.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V4. Edit target is the supplied artwork. Preserve exactly its full back view orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  },
+  {
+    "id": "O02_V5",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "左斜め後ろから見る眠れる石像.png",
+    "editedSourceFile": "exec-3213ce21-fcfa-485c-b1f8-519fcd7f1068.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V5. Edit target is the supplied artwork. Preserve exactly its rear-left three-quarter, mostly back visible orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  },
+  {
+    "id": "O02_V6",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "左側面の眠れるフード石像.png",
+    "editedSourceFile": "exec-a5ccbbb8-49f7-49d4-982c-a58299a4db9f.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V6. Edit target is the supplied artwork. Preserve exactly its full left profile, facing screen left orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  },
+  {
+    "id": "O02_V7",
+    "operation": "Built-in image editing: separate body and pedestal, restore occluded stone top",
+    "source": "灰白のフード石像、左斜め前.png",
+    "editedSourceFile": "exec-199ff756-6110-4805-a5cf-613e44780575.png",
+    "prompt": "Use case: precise-object-edit. Asset type: transparent game asset disassembly sheet for one hooded stone statue, O02 V7. Edit target is the supplied artwork. Preserve exactly its front-left three-quarter, facing toward screen left orientation and fixed elevated orthographic view; do not rotate it toward the front or mirror it. Preserve the original hood, robe folds, stone color, pose, surface wear, proportions and hand-painted style. Produce one wide transparent canvas showing exactly two separate components side by side with a broad transparent gap: LEFT the entire statue BODY ONLY, with NO pedestal, no floor slab, no shadow, natural irregular robe hem preserved intact; RIGHT the original tiered rectangular stone PEDESTAL ONLY, statue completely removed and occluded stone top reconstructed naturally. Keep the same orientation on the pedestal as in the source and the same physical scale for both components. Do not add feet, weapons, new ornament or a face not visible in the source. No labels, arrows, text, panels, checkerboard, backdrop. Complete objects with generous outer margins. Clean alpha edges. Source-part editing only, not runtime resizing or format conversion."
+  }
+]

@@ -1,10 +1,10 @@
 ﻿id,name,enabled,category,description,market,buy_price,sell_price,initial_count,stack_limit,effect,target,range,heal,heal_fraction,revive_hp,status_id,duration,stat_multiplier,cure_status_ids,persistent,usable_by,source,notes
 moonClear,月の清雫,1,consumable,自身または隣接味方のHPを最大HPの50%分回復,0,0,0,0,99,heal,ally,1,0,0.5,0,,0,1,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,
 moonDrop,月の雫,1,consumable,自身または隣接味方のHPを最大HPの20%分回復,0,0,0,0,99,heal,ally,1,0,0.2,0,,0,1,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,
-feral,凶獣薬,1,consumable,自身の全能力基礎値 +50%。発動ターンを含む2ターン。,0,0,0,0,99,feral,self,1,0,0,0,feral,2,1.5,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,
+feral,狂獣薬,1,consumable,自身の全能力基礎値 +50%。即時発動し、使用ターンを数えず、その後3回目の自軍ターン終了時まで持続。,0,0,0,0,99,feral,self,1,0,0,0,feral,3,1.5,,0,,効果時間の更新指示／2026-11-12,ID feralを維持。使用した自軍ターン終了時は減算しない。次の自軍ターンから終了時に残り3→2→1→解除。敵フェイズ・エリア切替では減算しない。
 powder,火薬瓶,1,consumable,3マス以内の視認中の敵に、確定で炎上を2ターン付与,0,0,0,0,99,status,enemy,3,0,0,0,burn,2,1,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,
 potion,癒しの雫,1,consumable,自身または隣接味方のHPを120回復,1,40,20,5,99,heal,ally,1,120,0,0,,0,1,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,
-antidote,浄化の雫,1,consumable,自身または隣接味方の状態異常をすべて解除,1,30,15,2,99,cure,ally,1,0,0,0,,0,1,poison|burn|paralysis|blind|freeze|doom,0,,ゲーム仕様書ver3.0／ブラウザα0.19,表示説明の「すべて」は旧文言。実際の解除範囲はcure_status_ids。露見・移動低下・凶獣薬・麻痺耐性は解除しない。
+antidote,浄化の雫,1,consumable,自身または隣接味方の状態異常をすべて解除,1,30,15,2,99,cure,ally,1,0,0,0,,0,1,poison|burn|paralysis|blind|freeze|doom,0,,ゲーム仕様書ver3.0／ブラウザα0.19,表示説明の「すべて」は旧文言。実際の解除範囲はcure_status_ids。露見・移動低下・狂獣薬・麻痺耐性は解除しない。
 revive,還りの灯,1,consumable,隣接する戦闘不能の味方をHP1で蘇生,1,100,50,1,99,revive,dead_ally,1,0,0,1,,0,1,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,
 brokenStaff,月蝕の錫杖(破損),1,key,破損した錫杖。取得と幕間の演出で使用する。,0,0,0,0,1,none,none,0,0,0,0,,0,1,,1,,ゲーム仕様書ver3.0／ブラウザα0.19,
 cathedralKey,聖堂の鍵,1,key,正門の解錠で消費する。,0,0,0,0,1,none,none,0,0,0,0,,0,1,,0,,ゲーム仕様書ver3.0／ブラウザα0.19,

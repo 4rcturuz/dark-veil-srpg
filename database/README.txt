@@ -150,7 +150,7 @@ heal_fraction [number]：有効最大HPに対する割合。0～1
 revive_hp [number]：蘇生時HP
 status_id [text]：付与する状態ID
 duration [number]：付与状態の持続ターン
-stat_multiplier [number]：凶獣薬型の能力倍率
+stat_multiplier [number]：狂獣薬型の能力倍率
 cure_status_ids [list]：解除する状態ID。|区切り
 persistent [boolean]：序章終了後も重要品をキャンペーンへ持ち越す
 usable_by [list]：防具の使用可能キャラクターID。*は全員
