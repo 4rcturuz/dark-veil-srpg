@@ -1,4 +1,4 @@
-# Dark Veil — 月影の還り人（ブラウザ版 α0.34）
+# Dark Veil — 月影の還り人（ブラウザ版 α0.34.1）
 
 このフォルダーはゲームの公開用ルートです。HTML・CSS・JavaScriptと画像、CSV、マップ・仕様書を含みます。ビルドは不要です。
 
@@ -9,35 +9,36 @@
 3. Settings → Pages → Build and deployment で Deploy from a branch を選び、main と / (root) を指定して保存します。
 4. 公開が完了したら同じ画面からサイトを開けます。
 
-## 今回の更新（α0.34）
+## 今回の更新（α0.34.1）
 
-街道の会話中の連続歩行、狂獣薬の効果時間、エレナの追加、おりおんの顔アイコンを反映しました。α0.33のマップ素材統合も含みます。
+おりおんのフェイスアイコンを公開先に補完する画像ファイルと、星詠みのキャラクター紹介文の更新を収録しています。街道・狂獣薬・エレナを含むα0.34が導入済みの環境用です。
 
-エレナは出撃準備で他の仲間を休息させてから出撃を選択できます（出撃上限4人）。旧セーブではLv1・休息で追加されます。セーブ構造はversion 4のままです。資料の不一致はスキル詳細の射程3／扇形1・3・5を採用しました。詳細はspecs/game-system.txt。
+### おりおんの画像が表示されない原因
+
+2026-11-12に公開版を調査し、face-icons.js の参照は存在する一方、assets/orion-portrait.png がHTTP 404となることを確認しました。GitHub mainのassets直下にも画像がありません。前回のα0.34配布ZIPには画像が入っているため、公開先の指定パスへの配置が欠落しています。
+
+この更新ZIPに提供原本の assets/orion-portrait.png と既存の face-icons.js を再収録しています。ファイル名の大文字・小文字と配置先をそのまま維持してください。
+
+### 星詠みの紹介
+
+紹介文はチュートリアル①幕間・②の台詞と採用済みスキルに基づき拡充。代表台詞には「いつもどおり、わたしが前衛やります？」を原文のまま採用しました。変更の正本は database/characters.csv です。
 
 ## 公開済みGitHub Pagesの更新手順
 
-1. 既存のα0.33から更新する場合は DarkVeil-alpha0.34-update.zip をPCにダウンロードして展開します。ZIPファイル自体はアップロードしません。
-2. https://github.com/4rcturuz/dark-veil-srpg を開き、Codeタブでmainブランチを選びます。
-3. Add file → Upload files を開きます。
-4. 差分ZIPの中身すべて（app.js、engine.js、assets、database、specsなど）をドラッグ＆ドロップし、既存と同じパスへ上書きします。外側のフォルダーは入れません。assets全体を削除せず内容を追加してください。全体ZIPを使う場合は100ファイル以下に分けてアップロードします。
-5. メッセージに「エレナ追加・街道演出・狂獣薬更新（α0.34）」と入力し、Commit directly to the main branch を選んで Commit changes を押します。mainが保護されている場合は新しいブランチへコミットし、Pull Requestをmainへマージします。
-6. Actionsタブで新しい pages build and deployment が緑のチェック（成功）になるのを待ちます。Settings → Pages の main / (root) は変更不要です。
-7. https://4rcturuz.github.io/dark-veil-srpg/ を開き、WindowsのChromeでは Ctrl+Shift+R で再読み込みします。タイトルの表示がα 0.34になったことを確認します。反映には最大10分ほどかかる場合があります。
-8. 出撃準備でエレナの顔・装備・4技、おりおんの顔を確認します。街道の歩行、狂獣薬の使用後3回目の自軍終了時の解除も確認できます。
+1. DarkVeil-alpha0.34.1-update.zip をダウンロードして展開します。
+2. https://github.com/4rcturuz/dark-veil-srpg の main の最上位から Add file → Upload files を開きます。
+3. ZIPの中身を同じ階層で上書きします。ZIP自体や外側のフォルダーは入れず、assetsフォルダーごと追加してください。既存のassetsは削除しません。
+4. コミット後、ActionsでPagesのデプロイ成功を確認します。
+5. https://4rcturuz.github.io/dark-veil-srpg/assets/orion-portrait.png を開き、画像単体が表示されることを確認します。
+6. ゲームを Ctrl+Shift+R で再読み込みし、タイトルのα 0.34.1、拠点・キャラクター詳細のおりおんの顔、星詠みの紹介文を確認します。
 
-公開URLは変わりません。既存リポジトリやセーブデータの削除は不要です。更新用ファイルの作成まで完了しており、GitHubのmainへの反映は上記のコミット時に行われます。
-
-差分ZIPにはα0.33から変更・追加したコード、CSV、仕様書、画像と .nojekyll を含めています。マップの論理データは変更していません。全体ZIPは新規配置や復元に利用できます。
-
-公式手順：https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository
-公開の確認：https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
+公開URLとセーブ形式は変わりません。GitHubへの反映は上記アップロード時に行われます。
 
 ## データを編集する場所
 
 - database/characters.csv、enemies.csv、items.csv、weapons.csv：味方・敵・アイテム・武器の定義。列の説明は database/README.txt。
 - specs/maps/ash-cemetery.txt：灰の墓地の地形・高度・配置。
-- specs/game-system.txt：ゲーム仕様書 ver3.15。
+- specs/game-system.txt：ゲーム仕様書 ver3.15.1。
 - assets/：顔アイコン・キャラクターチップ・背景。
 
 ## ローカル試遊
